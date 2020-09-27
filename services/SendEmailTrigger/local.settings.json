@@ -1,0 +1,12 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "<- your storage accont connection string ->",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "source_EVENTHUB":"<- your event hub binded to Stream Analytics output connection string ->"
+  }
+  ,
+  "ConnectionStrings":{
+    "logic_app_HTTP_POST_URL":"<- your logic app uri ->"
+  }
+}

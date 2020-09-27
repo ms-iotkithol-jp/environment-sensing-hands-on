@@ -1,0 +1,12 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "<- your storage accont connection string ->",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "source_EVENTHUB": "<- your event hub binded to Stream Analytics output ->",
+    "destination_EVENTHUB":"<- your event hub binded to SignalR input ->"
+  },
+  "ConnectionStrings":{
+    "iothub_connection_string":"<- your IoT Hub service role onnection string ->"
+  }
+}
