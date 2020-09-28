@@ -110,16 +110,16 @@ namespace EG.IoT.EnvironmentSensing
                 {
                     lock (telemetryConfig)
                     {
-                        telemetryConfig.telemetryCycleMSec = config.telemetryCycleMSec;
-                        telemetryConfig.humidityAvailable = config.humidityAvailable;
-                        telemetryConfig.temperatureAvailable = config.temperatureAvailable;
-                        telemetryConfig.pressureAvailable = config.pressureAvailable;
+                        if (config.telemetryCycleMSec != null) telemetryConfig.telemetryCycleMSec = config.telemetryCycleMSec;
+                        if (config.humidityAvailable != null) telemetryConfig.humidityAvailable = config.humidityAvailable;
+                        if (config.temperatureAvailable != null) telemetryConfig.temperatureAvailable = config.temperatureAvailable;
+                        if (config.pressureAvailable != null) telemetryConfig.pressureAvailable = config.pressureAvailable;
                     }
                 }
 
                 await UpdateConfigToReportedProperties();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 showConsoleLog($"Update Failed - {ex.Message}");
             }
@@ -169,6 +169,7 @@ namespace EG.IoT.EnvironmentSensing
                     }
                     msgBody += "}";
                     var sendMsg = new Message(System.Text.Encoding.UTF8.GetBytes(msgBody));
+                    sendMsg.Properties.Add("data-type", "environment-sensing");
                     await iothubClient.SendEventAsync(sendMsg);
 
                     showConsoleLog($"Send Telemetry Data - {msgBody}");

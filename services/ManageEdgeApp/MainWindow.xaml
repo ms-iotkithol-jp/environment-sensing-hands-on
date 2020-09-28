@@ -1,0 +1,29 @@
+﻿<Window x:Class="ManageEdgeApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ManageEdgeApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBox Name="tbCS" Margin="2"/>
+        <Button Name="buttonConnect" Content="Connect to IoT Hub" Grid.Row="1" Margin="2" Click="buttonConnect_Click"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button Name="buttonUpdateTwins" Content="Update twins of devices" Margin="2" Click="buttonUpdateTwins_Click" IsEnabled="False"/>
+            <TextBlock Text="telemetry interval (msec)" Margin="5,2,2,2" VerticalAlignment="Center"/>
+            <TextBox Name="tbTelemetryIntervalMSec" Text="1000" Margin="2,2,5,2" Width="100" VerticalAlignment="Center" TextAlignment="Right"/>
+            <TextBlock Text="timeout (minutes)" Margin="5,2,2,2" VerticalAlignment="Center"/>
+            <TextBox Name="tbTimeoutMin" Text="5" Margin="2" Width="50" VerticalAlignment="Center" TextAlignment="Right"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="3" Margin="2">
+            <TextBlock Name="tbLog"/>
+        </ScrollViewer>
+    </Grid>
+</Window>

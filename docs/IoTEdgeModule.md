@@ -6,6 +6,9 @@
 利用者の利便性を考え、簡易版と中級版を提供する。適宜選択して実習すること。  
 簡易版、詳細版、いずれも、計測、テレメトリーデータ送信、設定情報更新等のモジュール本体は、[BarometerSensing モジュール](../EdgeSolution/modules/BarometerSensing) を使用する。
 
+BarometerSensing モジュールの実行を確認したら、"複数デバイスの一括管理"を実習の事。
+
+
 ---
 ## IoT Edge デバイスの登録と Raspberry Pi の設定更新 
 簡易版、中級版共に、まずは、Azure IoT Hub に IoT Edge デバイスの登録と、Raspberry Pi 上で動作する IoT Edge Runtime の設定を行う。
@@ -98,8 +101,19 @@ Raspberry Pi の Shell 上で、以下のコマンドを実行し、配置した
 ```
 $ sudo iotedge list
 ```
+BarometerSensing、edgeAgent、edgeHub の3つのモジュールが running 状態であること。  
+
+※ 本コンテンツで、Azure IoT Edge Runtime は、この、edgeAgent と edgeHub の二つのモジュールで構成されている。
 
 IoT Device App の実習で紹介した、Azure IoT Explorer を使って、メッセージが Azure IoT Hub に送信されているか確認する。  
+
+BarometerSensing モジュールの実行ログは以下のコマンドで確認できる。
+```
+$ sudo iotedge logs BarometerSensing
+```
+正常に動いていれば、環境データの送信がログ表示される。  
+
+
 
 IoT Device App の実習で紹介した、デバイスツイン（IoT Edge Module の場合は、モジュールツイン)、サービス側からのメッセージ受信、ダイレクトメソッドのコールが、BarometerSensing モジュールには実装されている。「[Microsoft Docs の関連ページ](https://docs.microsoft.com/ja-jp/azure/iot-edge/iot-edge-modules)」を参照して、それぞれの機能を試していただきたい。  
 
@@ -109,5 +123,103 @@ IoT Device App の実習で紹介した、デバイスツイン（IoT Edge Modul
 BarometerSensing は、「[チュートリアル:Linux デバイス用の C# IoT Edge モジュールを開発する](https://docs.microsoft.com/ja-jp/azure/iot-edge/tutorial-csharp-module)」 をベースに作成したモジュールを改造したものである。子のチュートリアルに従って、VS Code で、IoT Edge Solution を作成し、[device/EdgeSolution](../device/EdgeSolution)の中身と見比べて、どこが違うか確認し、チュートリアルに従って作成した、Edge Solution を改造し、このハンズオンで公開されているファイル群を使って、同じものを作成してみよう。  
 ただし、Raspberry Pi 用の ARM32V7 用のモジュールの Build は、Windows PC 上ではできないので、[device/EdgeSolution/modules/BarometerSensing](../device/EdgeSolution/modules/BarometerSensig)の中身を、Raspberry Pi 上に転送し、Docker build、Docker tag、Docker push を使って、ビルドとタグ付けと、ACR へのプッシュを行う必要がある。このような状況は、実際の IoT ソリューション開発では日常的なことなので、各自調べてスキルアップを図ってほしい。  
 
+
 ---
+## 複数デバイスの一括制御  
+Azure IoT Device SDK を使ったアプリケーションで実習した'<b>デバイスツイン</b>'は、Azure IoT Edge でも利用可能である。Azure IoT Edge の場合は、IoT Edge Runtimeが動いているデバイス向けのツインと、各モジュールごとのツインが用意されている。モジュールのツインのことを、'<b>モジュールツイン</b>'と呼ぶ。  
+Azure IoT Device SDK を使ったアプリケーションの時と同様、モジュールツインも同様な方法で、Desired Properties を更新可能である。  
+Azure IoT Device SDK を使った実習では、一つのデバイスのデバイスツイン呑みを更新していたが、ここでは、複数デバイスのツインを一括で更新する方法を実習する。  
+
+※ 実際の IoT ソリューションでは、接続デバイスが増えていった場合に、更新が必要な膨大な数のデバイスを、一個づつ確実に更新していくのは、とても大変である。 Azure IoT Hub では、条件に合致する、デバイス、モジュールに対し、ツイン更新や Direct Methodコールを一括で行える機能を提供している。  
+
+### 実習 
+VS Code で、[services/ManageEdgeApp](../services/ManageEdgeApp) を開く。  
+[MainWindow.xaml.cs](../services/ManageEdgeApp/MainWindow.xaml.cs) を開いて、30行目付近の、
+```C#
+        public MainWindow()
+        {
+            InitializeComponent();
+            this.Loaded += MainWindow_Loaded;
+        }
+
+        string iothubConnectionString = "<- your IoT Hub service role onnection string ->";
+        JobClient jobClient;
+
+```
+<b>\<- your IoT Hub service role onnection string -\></b> の部分を、各自の Azure IoT Hub の service ロールの接続文字列で置き換える。  
+F5キーを押下して実行すると、以下の様な GUI が表示される。  
+![manage app](../images/edge-module/manage-module-twins.png)  
+'<b>Connect to IoT Hub</b>' をクリックすると、このアプリケーションが Azure IoT Hub に、service ロールで接続される。  
+'<b>telemetry interval(msec)</b>' に、単位をミリ秒で更新したいテレメトリーサイクル間隔を入力して、'<b>Update tiwns of devices</b> をクリックすると、条件に合致するデバイスのモジュールツインの更新がスケジュールされ、適宜更新されていく。  
+更新状況は、テキストボックスやボタンの下のエリアにログ表示される。  
+
+モジュールツインの一括更新は、以下の様なロジックで行われる。
+```C#
+  var twin = new Twin();
+  var telemetryCycleSpec = new {
+    telemetryCycleMSec = newIntervalMSec
+  };
+  twin.Properties.Desired["telemetry-config"] = telemetryCycleSpec;
+
+  var jobId = System.Guid.NewGuid().ToString();
+  var jobResponse = await jobClient.ScheduleTwinUpdateAsync(
+    jobId,
+    $"FROM devices.modules Where properties.reported.telemetry-config.telemetryCycleMSec <> {newIntervalMSec}",
+    twin,
+    DateTime.UtcNow,
+    (long)TimeSpan.FromMinutes(newTimeoutMin).TotalSeconds);
+```
+モジュールツインが更新される条件は、 
+```C#
+$"FROM devices.modules Where properties.reported.telemetry-config.telemetryCycleMSec <> {newIntervalMSec}"
+```
+で、定義されている。モジュールツインの Reported Properties に、telemetry-config.telemetryCycleMSec というプロパティが定義されていて、かつ、新しく指定された、時間間隔と異なる値が指定されているものが自動的に選択されて、更新対象となる。 
+Azure IoT Device SDK を使ったアプリデバイスの場合は、 
+```C#
+$"FROM devices Where properties.reported.telemetry-config.telemetryCycleMSec <> {newIntervalMSec}"
+``` 
+で指定すればよい。  
+
+※ Direct Method コールの場合は、[https://github.com/ms-iotkithol-jp/AzureIoTHubDeviceMethodSampe/tree/master/utility/DirectMethodInJob](https://github.com/ms-iotkithol-jp/AzureIoTHubDeviceMethodSampe/tree/master/utility/DirectMethodInJob) にサンプルがあるので、そちらを参照の事。  
+
+ただ一つのデバイスにせよ、複数デバイスの場合にせよ、ツインの更新や Direct Method コールの完了には、現実としてある程度時間がかかる。  
+スケジュールされたジョブの状態を確認するコードが、[MainWindow.xaml.cs](../services/ManageEdgeApp/MainWindow.xaml.cs) に入っているので、動作を追ってほしい。
+```C#
+  private async Task MonitorJobStatus(string jobId, int timeoutMin)
+  {
+    var limitTime = DateTime.Now.AddMinutes(timeoutMin);
+    do {
+      var job = await jobClient.GetJobAsync(jobId);
+
+      ShowLog($"JobId[{jobId} Status : {job.Status.ToString()}", true, this.Dispatcher);
+      if (job.DeviceJobStatistics != null) {
+        ShowLog($"Statistics - DeviceCount:   {job.DeviceJobStatistics.DeviceCount}", false, this.Dispatcher);
+        ShowLog($"Statistics - FailedCount:   {job.DeviceJobStatistics.FailedCount}", false, this.Dispatcher);
+        ShowLog($"Statistics - PendingCount:  {job.DeviceJobStatistics.PendingCount}", false, this.Dispatcher);
+        ShowLog($"Statistics - RunningCount:  {job.DeviceJobStatistics.RunningCount}", false, this.Dispatcher);
+        ShowLog($"Statistics - SucceededCount:{job.DeviceJobStatistics.SucceededCount}", false, this.Dispatcher);
+      }
+      if (job.Status == JobStatus.Cancelled || job.Status == JobStatus.Completed || job.Status == JobStatus.Failed) {
+        switch (job.Status) {
+        case JobStatus.Cancelled:
+          ShowLog("Job has been canceled", true, this.Dispatcher);
+          break;
+        case JobStatus.Completed:
+          ShowLog("Job has been completed", true, this.Dispatcher);
+          break;
+        case JobStatus.Failed:
+          ShowLog("Job has been failed", true, this.Dispatcher);
+          break;
+        }
+        break;
+      }
+    }
+    await Task.Delay(1000);
+  } while (DateTime.Now < limitTime);
+
+  ShowLog($"Job[{jobId}] is finished.", true, this.Dispatcher);
+```
+
+
+--- 
 [次のステップに進む](StreamAnalytics.md)
