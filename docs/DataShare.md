@@ -19,14 +19,14 @@ Event Hub の <b>datashare</b> で受信したデータを、SignalR サービ�
 VS Code による、Azure Functions 構築の基本は、「[クイック スタート:Visual Studio Code を使用して Azure で関数を作成する](https://docs.microsoft.com/ja-jp/azure/azure-functions/functions-create-first-function-vs-code?pivots=programming-language-csharp)」を参照するとよい。実習で使用するロジック一式も、このドキュメントを元に作成したものを改変している。  
 
 環境が整ったら、以下の手順で実習を進める。  
-1. [Function ロジックへの接続情報追加](#Function-ロジックへの接続情報追加)
-2. [SignalR による転送の確認](#SignalR-による転送の確認)
-3. [デバイスへのコマンド送信の確認](#デバイスへのコマンド送信の確認)
-4. [Azure へのデプロイ](#Azure-へのデプロイ)
+1. [Function ロジックへの接続情報追加](#1-Function-ロジックへの接続情報追加)
+2. [SignalR による転送の確認](#2-SignalR-による転送の確認)
+3. [デバイスへのコマンド送信の確認](#3-デバイスへのコマンド送信の確認)
+4. [Azure へのデプロイ](#4-Azure-へのデプロイ)
 
 ---
 
-### Function ロジックへの接続情報追加    
+### 1. Function ロジックへの接続情報追加    
 VS Codeで、[services/ShareEnvData](../services/ShareEnvData)を開く。 
 このプロジェクトは、Event Hub や Azure IoT Hub への接続情報を設定すれば動作可能になっている。  
 まず、[local.settings.json](../services/ShareEnvData/local.settings.json) を開き
@@ -85,7 +85,7 @@ VS Codeで、[services/ShareEnvData](../services/ShareEnvData)を開く。
 Azure が提供するサービスとの連携は、Functions のバインディング機構を利用することで非常に簡単に実装可能である。Event Hub が受信したデータは、<b>events</b> という変数で渡され、別の Event Hub への書き込みは、引数で渡される、<b>outputEvents</b> のAddAsync メソッドをコールするだけで送信可能である。  
 
 ---
- ## SignalR による転送の確認  
+ ## 2. SignalR による転送の確認  
 [services/SampleViewer/scripts/multideviceviewer.html](../services/SampleViewer/multideviceviewer.html) を使うと、SignalR が配信しているデータをグラフ化できるので、それを使って確認を行う。  
 まず、[services/SampleViewer/scripts/multidevicedatabysignalr.js](../services/SampleViewer/scripts/multidevicedatabysignalr.js)  をエディターで開き、80行付近の、
 ```javascript
@@ -102,7 +102,7 @@ Azure が提供するサービスとの連携は、Functions のバインディ�
 この HTML ファイルが開かれると、JavaScript のロジックが実行され、SignalR サービスにサブスクライブし、データ受信待ちとなる。<b>datashare</b> にデータが送信されるたびに、ShareEnvData のロジックが起動され、SignalR を経て、データが届き、温度、湿度、大気圧のグラフが、デバイスごとに表示される。  
 
 ---
-## デバイスへのコマンド送信の確認  
+## 3. デバイスへのコマンド送信の確認  
 デバイスへのコマンド送信は、Raspberry Pi が送ってきた温度、湿度から不快指数を計算し、閾値を超えた場合に、送付元のデバイスに対して、LEDを点灯、閾値が戻ったときにLEDを消灯する。そのあたりのロジックを紹介しておく。  
 ```C#
     string deviceId = envData.deviceid;
@@ -145,7 +145,7 @@ Azure が提供するサービスとの連携は、Functions のバインディ�
 
 
 ---
-## Azure へのデプロイ  
+## 4. Azure へのデプロイ  
 ローカルでのテストが済んだら、クラウドへの発行を行う。  
 まず、Azure ポータルで、Function App を作成する。リソースグループのページで、'＋追加'をクリックし、"Function App" で検索し、'作成'をクリックする。
 ![creating-function](../images/datashare/creating-function.png)  

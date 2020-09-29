@@ -168,6 +168,7 @@ SELECT m.deviceid, e.temperature, e.humidity, e.pressure, e.timestamp, m.email, 
 ```
 emailmapping(device-email-map.csvが本体)と、IoT Hub から送付されたデータのdeviceidを紐づけて、そのデバイスの部屋情報と、その管理者のメールアドレスを紐づけている。更に、温度が30度を超えた場合のみ、alert（Event Hub）に出力を行っている。
 
+---
 ## おまけ  
 クエリーでは、四則演算やビルトイン関数を使ったデータ計算や、複数レコードにわたる集合処理等も可能である。  
 JavaScript や C# を使ったユーザー定義関数を組み込むことができる。受信したデータの複雑な加工が必要な場合に便利である。  

@@ -5,11 +5,11 @@
 
 ## 実習内容
 1. [IoT Hub への IoT デバイス登録](#1-iot-hub-への-iot-デバイス登録) 
-2. [IoTAppDevSDK アプリの実行](#iotappdevsdk-アプリの実行)
-3. [テレメトリーデータの確認](#テレメトリーデータの確認) 
-4. [デバイスの設定情報更新](#デバイスの設定情報更新) 
-5. [デバイスへのコマンド送信](#デバイスへのコマンド送信) 
-6. [ダイレクトメソッドコール](#ダイレクトメソッドコール) 
+2. [IoTAppDevSDK アプリの実行](#2-iotappdevsdk-アプリの実行)
+3. [テレメトリーデータの確認](#3-テレメトリーデータの確認) 
+4. [デバイスの設定情報更新](#4-デバイスの設定情報更新) 
+5. [デバイスへのコマンド送信](#5-デバイスへのコマンド送信) 
+6. [ダイレクトメソッドコール](#6-ダイレクトメソッドコール) 
 ---
 ## 1. IoT Hub への IoT デバイス登録  
 Azure ポータルで、IoT デバイスを登録する。 
@@ -21,7 +21,7 @@ Azure ポータルで、作成した IoT Hub を開き、図のように登録�
 赤枠をマウスでクリックすると、クリップボードに登録デバイス用の接続文字列（登録したデバイス用の秘密情報）がコピーされる。この文字列は次のステップで使うので、コピーしておくこと。 
 
 --- 
-## IoTAppDevSDK アプリの実行 
+## 2. IoTAppDevSDK アプリの実行 
 Raspberry Pi に SSH で接続した Putty のシェル上で、[device/IoTAppDevSDK/](../device/IoTAppDevSDK) にチェンジディレクトリして、[Program.cs](../device/IoTAppDevSDK/Program.cs) の一行目をコメントアウトする。  
 ```
 $ cd environment-sensing-hand-on/device/IoTAppDevSDK
@@ -42,7 +42,7 @@ $ dotnet run 'connection string for device'
 
 
 --- 
-## テレメトリーデータの確認 
+## 3. テレメトリーデータの確認 
 アプリが実行されると、BME280センサーで計測した、温度、湿度、大気圧が、計測時間付きで1秒おきに送信される。  
 正しく、送信されているかどうかを、[Azure IoT Explorer](https://docs.microsoft.com/ja-jp/azure/iot-pnp/howto-use-iot-explorer) を使って確認する。  
 [リリースサイト](https://github.com/Azure/azure-iot-explorer/releases)から、最新の拡張子が、msi のファイルをダウンロード、実行し、インストールする。 
@@ -83,7 +83,7 @@ Telemetryを選択して、'▷ Start' をクリックすると、Azure IoT Hub 
 の様な形式でJSONフォーマットで定期的に送信される。
 
 --- 
-## デバイスの設定情報更新 
+## 4. デバイスの設定情報更新 
 IoTAppDevSDK は、デフォルトで1秒間隔でテレメトリーデータを送信するが、送信間隔と、送信するセンサー種別を、サービス側から遠隔で Azure IoT Hub を通じて変更が可能である。 
 Azure ポータルで、Azure IoT Hub の項目を開き、登録された IoT デバイスを表示する。  
 ※ 表示方法は、デバイス登録時に接続文字列を取得した際の手順と同じです。  
@@ -99,7 +99,7 @@ telemetryCycleMSec (送信間隔-ミリ秒)を 5000 に変更して、保存を�
 ※ Device Twin の更新は、Azure IoT Explorer でも可能である。
 
 --- 
-## デバイスへのコマンド送信 
+## 5. デバイスへのコマンド送信 
 IoTAppDevSDK アプリは、Azure IoT Hub からコマンドを受信して、LED の点灯消灯を制御できる。 
 デバイスツインを選択した同じページで、"デバイスへのメッセージ" を選択する。
 ![send c2d](../images/sdk-app/send-c2d.png)
@@ -114,7 +114,7 @@ IoTAppDevSDK アプリは、Azure IoT Hub からコマンドを受信して、LE
 実際にやってみて確認すること。  
 
 --- 
-## ダイレクトメソッドコール 
+## 6. ダイレクトメソッドコール 
 サービス側から、Azure IoT Hub を通じて、デバイスにコマンドを送信し、デバイス側で処理が完了した時点で（または途中で）サービス側に情報を返すような、同期的通信を ダイレクトメソッドという機構で行うことが可能である。  
 デバイスツインを選択した同じページで、"ダイレクトメソッド"を選択する。
 ![direct method](../images/sdk-app/invoke-direct-method.png)
