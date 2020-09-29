@@ -9,12 +9,12 @@
 - 条件に合致するテレメトリーデータの抽出 
 
 作業手順
-1. Blob Container の作成
-2. Event Hub の作成
-3. Stream Analytics の作成
-4. 入力の作成 
-5. 出力の作成 
-6. クエリーの作成と Analytics の実行 
+1. [Blob Container の作成](#1-blob-container-の作成)
+2. [Event Hub の作成](#2-event-hub-の作成)
+3. [Stream Analytics の作成](#3-stream-analytics-の作成)
+4. [入力の作成](#4-入力の作成) 
+5. [出力の作成](#4-出力の作成) 
+6. [クエリーの作成と Analytics の実行](#5-クエリーの作成と-stream-analytics-の実行) 
 
 -------------------------------
 ## 1. Blob Container の作成  
@@ -171,7 +171,7 @@ emailmapping(device-email-map.csvが本体)と、IoT Hub から送付された�
 ## おまけ  
 クエリーでは、四則演算やビルトイン関数を使ったデータ計算や、複数レコードにわたる集合処理等も可能である。  
 JavaScript や C# を使ったユーザー定義関数を組み込むことができる。受信したデータの複雑な加工が必要な場合に便利である。  
-3番目のクエリーは単なる数値比較でとてもシンプルであるが、「[Stream Analyticsでの以上検出](https://docs.microsoft.com/ja-jp/azure/stream-analytics/stream-analytics-machine-learning-anomaly-detection)」を使うと、異常トレンドの抽出など、より高度な異常検知が可能になる。  
+3番目のクエリーは単なる数値比較でとてもシンプルであるが、「[Stream Analyticsでの異常検出](https://docs.microsoft.com/ja-jp/azure/stream-analytics/stream-analytics-machine-learning-anomaly-detection)」を使うと、異常トレンドの抽出など、より高度な異常検知が可能になる。また、この機能は、Azure IoT Edge 上でも動作可能である。  
 
 以上を踏まえ、様々なシナリオに応じたクエリーを考えてみていただきたい。  
 

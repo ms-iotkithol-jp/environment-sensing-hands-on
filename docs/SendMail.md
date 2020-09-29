@@ -5,9 +5,10 @@ Stream Analytics で抽出した警告データをトリガーにメールを送
 ※ 本実習を行うには、Office 365 のアカウントが必要  
 
 以下の手順で実習を行う。  
-1. メールを送信する Logic App を作成  
-2. <b>alert</b> Event Hub へのメッセージ受信をトリガーに、Logic App を起動する Function を作成する  
+1. [メールを送信する Logic App を作成](#メールを送信する-logic-app-を作成)  
+2. [<b>alert</b> Event Hub へのメッセージ受信をトリガーに、Logic App を起動する Function を作成する](#alert-event-hub-へのメッセージ受信をトリガーにlogic-app-を起動する-function-を作成する)  
 
+---
 ## メールを送信する Logic App を作成  
 以下の図に従って、Logic App を作成する。
 ![creat](../images/logic-app/1-create.png)
@@ -70,7 +71,7 @@ VS Code で、[services/SendEmailTrigger](../services/SendEmailTrigger) を開�
 '<b>source_EVENTHUB</b>' は、<b>alert</b> Event Hub の、<b>listen</b> ポリシーの接続文字列を使用する。  
 '<b>logic_app_HTTP_POST_URL</b>' に、前のステップの URL をセットする。
 
-以上で設定は完了である。「[環境データの共有](DataShare.md)」で実習した方法で、ローカルテストと、Azure へのデプロイを行う。  
+以上で設定は完了である。「[環境データの共有](DataShare.md#Azure-へのデプロイ)」で実習した方法で、ローカルテストと、Azure へのデプロイを行う。  
 
 以上で、このステップは実習完了である。
 

@@ -6,7 +6,11 @@
 利用者の利便性を考え、簡易版と中級版を提供する。適宜選択して実習すること。  
 簡易版、詳細版、いずれも、計測、テレメトリーデータ送信、設定情報更新等のモジュール本体は、[BarometerSensing モジュール](../EdgeSolution/modules/BarometerSensing) を使用する。
 
-BarometerSensing モジュールの実行を確認したら、"複数デバイスの一括管理"を実習の事。
+- [IoT Edge デバイスの登録と Raspberry Pi の設定更新](#iot-edge-デバイスの登録と-raspberry-pi-の設定更新)
+- [簡易版](#簡易版)
+- [中級版](#中級版)
+
+BarometerSensing モジュールの実行を確認したら、"[複数デバイスの一括制御](#複数デバイスの一括制御)"を実習の事。
 
 
 ---
@@ -119,7 +123,7 @@ IoT Device App の実習で紹介した、デバイスツイン（IoT Edge Modul
 
 
 ---
-中級版  
+## 中級版  
 BarometerSensing は、「[チュートリアル:Linux デバイス用の C# IoT Edge モジュールを開発する](https://docs.microsoft.com/ja-jp/azure/iot-edge/tutorial-csharp-module)」 をベースに作成したモジュールを改造したものである。子のチュートリアルに従って、VS Code で、IoT Edge Solution を作成し、[device/EdgeSolution](../device/EdgeSolution)の中身と見比べて、どこが違うか確認し、チュートリアルに従って作成した、Edge Solution を改造し、このハンズオンで公開されているファイル群を使って、同じものを作成してみよう。  
 ただし、Raspberry Pi 用の ARM32V7 用のモジュールの Build は、Windows PC 上ではできないので、[device/EdgeSolution/modules/BarometerSensing](../device/EdgeSolution/modules/BarometerSensig)の中身を、Raspberry Pi 上に転送し、Docker build、Docker tag、Docker push を使って、ビルドとタグ付けと、ACR へのプッシュを行う必要がある。このような状況は、実際の IoT ソリューション開発では日常的なことなので、各自調べてスキルアップを図ってほしい。  
 
