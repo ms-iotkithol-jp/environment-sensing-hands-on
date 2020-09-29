@@ -9,7 +9,7 @@ Azure IoT Central は、Azure IoT Hub、[DPS（Device Provisioning Service）](h
 
 1. [IoT Central アプリケーションの作成](#1-iot-central-アプリケーションの作成) 
 2. [デバイステンプレートの作成](#2-デバイステンプレートの作成)
-3. [IoT Edge デバイスの登録](3-iot-edge-デバイスの登録) 
+3. [IoT Edge デバイスの登録](#3-iot-edge-デバイスの登録) 
 4. [IoT Central アプリケーションのユーザー管理](#4-iot-central-アプリケーションのユーザー管理)
 5. [IoT Central アプリケーションのカスタマイズ](#5-iot-central-アプリのカスタマイズ)  
 
