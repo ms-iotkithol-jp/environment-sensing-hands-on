@@ -22,11 +22,17 @@ Azure ポータルで、作成した IoT Hub を開き、図のように登録�
 
 --- 
 ## 2. IoTAppDevSDK アプリの実行 
-Raspberry Pi に SSH で接続した Putty のシェル上で、[device/IoTAppDevSDK/](../device/IoTAppDevSDK) にチェンジディレクトリして、[Program.cs](../device/IoTAppDevSDK/Program.cs) の一行目をコメントアウトする。  
+Raspberry Pi に SSH で接続した Putty のシェル上で、[device/iotappdevsdk.tar.gz](../device/iotappdevsdk.tar.gz) をダウンロードし、解凍する。  
 ```
-$ cd environment-sensing-hand-on/device/IoTAppDevSDK
+$ curl -OL https://github.com/ms-iotkithol-jp/environment-sensing-hands-on/blob/master/device/iotappdevsdk.tar.gz
+$  tar zxvf iotappdevsdk.tar.gz
+$ cd IoTAppDevSDK
+```
+[Program.cs](../device/IoTAppDevSDK/Program.cs) の一行目をコメントアウトする。
+```
 $ vi Program.cs
 ```
+  
 ```C#
 // #define REMOTE_DEBUG
 
@@ -38,7 +44,7 @@ $ dotnet run 'connection string for device'
 ```
 ''で囲まれた、<i>connection string for device</i> の部分を接続文字列で置き換える。接続文字列の前後の ' は、忘れずにつけること。  
 
-※ 本アプリは、Windows PC 上のVisual Studio 2019、または、VS Code からリモートデバッグが可能である。リモートデバッグでの実行確認を行いたい場合は、Program.cs の1行目のマクロをそのままにすると、リモートからのデバッガーのアタッチを待つループが実行されるようになるので、そこでブレークすればよい。
+※ 本アプリは、Windows PC 上の[Visual Studio 2019](https://docs.microsoft.com/ja-jp/visualstudio/debugger/remote-debugging-dotnet-core-linux-with-ssh?view=vs-2019#attach-the-debugger)、または、[VS Code](https://www.jenx.si/2020/06/19/dot-net-core-remote-debugging-raspberry-pi/) からリモートデバッグが可能である。リモートデバッグでの実行確認を行いたい場合は、Program.cs の1行目のマクロをそのままにすると、リモートからのデバッガーのアタッチを待つループが実行されるようになるので、そこでブレークすればよい。
 
 
 --- 
