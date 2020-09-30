@@ -242,7 +242,8 @@ $"FROM devices Where properties.reported.telemetry-config.telemetryCycleMSec <> 
       "host": {}
     }
   }
-}```
+}
+```
 Raspberry Pi 起動時に確定した、IP アドレスが、追加したモジュールのツインの Reported Properties に表示される。 
 
 --- 
