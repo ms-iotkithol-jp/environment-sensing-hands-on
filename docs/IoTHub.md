@@ -1,8 +1,8 @@
 # Azure IoT Hub を作成する
 [https://docs.microsoft.com/ja-jp/azure/iot-hub/](https://docs.microsoft.com/ja-jp/azure/iot-hub/)を参考に、以下の手順で IoT Hub を作成する。   
 1. [リソースグループの作成](#1-リソースグループの作成) 
-2. IoT Hub の作成 
-3. コンシューマーグループを作成
+2. [IoT Hub の作成](#2-iot-hub-の作成) 
+3. [コンシューマーグループを作成](#3-コンシューマーグループを作成)
 
 ---
 ## 1. リソースグループの作成  
