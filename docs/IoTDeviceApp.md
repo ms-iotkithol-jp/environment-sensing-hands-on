@@ -24,7 +24,7 @@ Azure ポータルで、作成した IoT Hub を開き、図のように登録�
 ## 2. IoTAppDevSDK アプリの実行 
 Raspberry Pi に SSH で接続した Putty のシェル上で、[device/iotappdevsdk.tar.gz](../device/iotappdevsdk.tar.gz) をダウンロードし、解凍する。  
 ```
-$ curl -OL https://github.com/ms-iotkithol-jp/environment-sensing-hands-on/blob/master/device/iotappdevsdk.tar.gz
+$ curl -OL https://github.com/ms-iotkithol-jp/environment-sensing-hands-on/releases/download/20200930/iotappdevsdk.tar.gz
 $  tar zxvf iotappdevsdk.tar.gz
 $ cd IoTAppDevSDK
 ```
