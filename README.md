@@ -31,12 +31,13 @@ Microsoft Azure が提供する IoT 関連サービス・技術は多岐にわ�
 実習は、以下のステップで行う。  
 
 1. [デバイスのセットアップ](docs/SetupDevice.md)
-2. [Azure IoT Device SDK を使ったデバイスの接続](docs/IoTDeviceApp.md)
-3. [Azure IoT Edge を使ったデバイスの接続](docs/IoTEdgeModule.md)
-4. [Azure IoT Hub で受信したデータをリアルタイム処理する](docs/StreamAnalytics.md)
-5. [環境データの共有](docs/DataShare.md)
-6. [警告メールを送信する](docs/SendMail.md)
-7. [Azure IoT Central によるデバイス接続](docs/IoTCentral.md)
+2. [IoT Hub の作成](docs/IoTHub.md)
+3. [Azure IoT Device SDK を使ったデバイスの接続](docs/IoTDeviceApp.md)
+4. [Azure IoT Edge を使ったデバイスの接続](docs/IoTEdgeModule.md)
+5. [Azure IoT Hub で受信したデータをリアルタイム処理する](docs/StreamAnalytics.md)
+6. [環境データの共有](docs/DataShare.md)
+7. [警告メールを送信する](docs/SendMail.md)
+8. [Azure IoT Central によるデバイス接続](docs/IoTCentral.md)
 
 Let's enjoy!
 

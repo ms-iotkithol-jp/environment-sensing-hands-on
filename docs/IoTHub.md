@@ -1,6 +1,6 @@
 # Azure IoT Hub を作成する
 [https://docs.microsoft.com/ja-jp/azure/iot-hub/](https://docs.microsoft.com/ja-jp/azure/iot-hub/)を参考に、以下の手順で IoT Hub を作成する。   
-1. リソースグループの作成 
+1. [リソースグループの作成](#1-リソースグループの作成) 
 2. IoT Hub の作成 
 3. コンシューマーグループを作成
 
@@ -17,7 +17,7 @@ Azure ポータルで、
 作成したリソースグループ内に、IoT Hub を作成する。 
 Azure IoT Hub の名前は、インターネット上のURLの一部として使われるので、利用可能な名前を使うこと。 
 リージョンは、リソースグループと同じ場所を選択すること。  
-![Create IoT Hub](./images/iothub/1-create-iothub.png)
+![Create IoT Hub](../images/iothub/1-create-iothub.png)
 
 
 ---
@@ -27,3 +27,5 @@ IoT Hub が受信したデバイスからの環境データは、Stream Analytic
 ポータルで作成した IoT Hub を開き、左側の"組込みのエンドポイント"を選択し、表示されたページで入力する。
 ![Create Consumer Group](./images/iothub/2-create-consumer-group.png)
 
+---
+[次のステップへ進む](IoTDeviceApp.md)

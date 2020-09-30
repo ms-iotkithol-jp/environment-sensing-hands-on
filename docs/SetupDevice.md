@@ -41,4 +41,4 @@ Grove Pi+ は Raspberry Piのイーサーネット接続ポートを左上にし
 ![schematic](../images/device/connect-sensors.png)
 
 ---
-[次のステップへ進む](IoTDeviceApp.md)
+[次のステップへ進む](IoTHub.md)
