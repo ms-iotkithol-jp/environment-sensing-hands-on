@@ -218,7 +218,7 @@ namespace EG.IoT.EnvironmentSensing
                 dynamic commandJson = Newtonsoft.Json.JsonConvert.DeserializeObject(methodRequest.DataAsJson);
                 if (commandJson.value != null)
                 {
-                    if (commandJson.Value == "on")
+                    if (commandJson.value == "on")
                     {
                         ledButtonDevice.TurnOn();
                         var responsePayload = new

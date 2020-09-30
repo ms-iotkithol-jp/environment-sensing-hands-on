@@ -43,7 +43,7 @@ CSVファイルが出来上がったら、作成した Blob Container にアッ�
 ----
 ## 2. Event Hub の作成  
 次に、Stream Analytics の処理結果を受信する Event Hub を二つ作成する。一つはテレメトリーデータをダッシュボード表示するためのデータの受け口で、もう一つは、決められた閾値を超えた時のデータの受け口である。  
-「[クイック スタート:Azure portal を使用したイベント ハブの作成](https://docs.microsoft.com/ja-jp/azure/event-hubs/event-hubs-create)」を参考に、作成した Azure IoT Hub と同じリソースグループ、リージョンに、Event Hub 名前空間と
+「[クイック スタート:Azure portal を使用したイベント ハブの作成](https://docs.microsoft.com/ja-jp/azure/event-hubs/event-hubs-create)」を参考に、作成した Azure IoT Hub と同じリソースグループ、リージョンに、Event Hub 名前空間を作成可能な名前で作成し、
 - <b>datashare</b>
 - <b>alert</b>  
 
@@ -84,7 +84,7 @@ Stream Analytics が Event Hub にデータを送信するには、デバイス�
 参照入力は、
 ![add-ref-data](../images/realtime-data-processing/add-ref-data.png)
 のように、'<b>＋参照入力の追加</b>'で、'<b>Blob Storage または…</b>'
-を選択し、指示に従って、<b>device-email-map.csv</b>を選択して、
+を選択し、指示に従って、'<b>stream-analytics-reference</b>' コンテナの <b>device-email-map.csv</b>を選択して、
 - '<b>emailmapping</b>'  
 
 という入力エイリアスで、作成する。 
@@ -94,7 +94,7 @@ Stream Analytics が Event Hub にデータを送信するには、デバイス�
 ---
 ## 4. 出力の作成  
 出力は、生データ保存、環境データ共有用、条件抽出通知用の3つを作成する。  
-生データ保存は、1.で作成した、'<b>rawdata</b>' という名前の Blob Container を指定する。「[ジョブの出力を構成する](https://docs.microsoft.com/ja-jp/azure/stream-analytics/stream-analytics-quick-create-portal#configure-job-output)」を参考に、  
+生データ保存は、1.で作成した、'<b>environment-rawdata</b>' という名前の Blob Container を指定する。「[ジョブの出力を構成する](https://docs.microsoft.com/ja-jp/azure/stream-analytics/stream-analytics-quick-create-portal#configure-job-output)」を参考に、  
 
 - <b>rawdata</b>
 
