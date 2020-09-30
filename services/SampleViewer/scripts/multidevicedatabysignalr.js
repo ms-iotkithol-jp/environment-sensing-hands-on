@@ -59,12 +59,23 @@
         titleCellElem.appendChild(document.createTextNode(deviceId));
 
         var rowElem = tableElem.insertRow(-1);
+        rowElem.style.height = "400px";
         var tempElem = rowElem.insertCell(-1);
+        tempElem.style.width = "400px";
         var humElem = rowElem.insertCell(-1);
+        humElem.style.width = "400px";
         var presElem = rowElem.insertCell(-1);
+        presElem.style.width = "400px";
+
         var ctxTemp = tempElem.appendChild(document.createElement("canvas"));
+        ctxTemp.height = 400;
+        ctxTemp.width = 400;
         var ctxHum = humElem.appendChild(document.createElement("canvas"));
+        ctxHum.height = 400;
+        ctxHum.width = 400;
         var ctxPres = presElem.appendChild(document.createElement("canvas"));
+        ctxPres.height = 400;
+        ctxPres.width = 400;
 
         var optionsNoAnimation = { animation: false };
 

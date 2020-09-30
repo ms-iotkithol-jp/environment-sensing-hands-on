@@ -86,7 +86,7 @@ Azure が提供するサービスとの連携は、Functions のバインディ�
 
 ---
  ## 2. SignalR による転送の確認  
-[services/SampleViewer/scripts/multideviceviewer.html](../services/SampleViewer/multideviceviewer.html) を使うと、SignalR が配信しているデータをグラフ化できるので、それを使って確認を行う。  
+[services/SampleViewer/multideviceviewer.html](../services/SampleViewer/multideviceviewer.html) を使うと、SignalR が配信しているデータをグラフ化できるので、それを使って確認を行う。  
 まず、[services/SampleViewer/scripts/multidevicedatabysignalr.js](../services/SampleViewer/scripts/multidevicedatabysignalr.js)  をエディターで開き、80行付近の、
 ```javascript
     const apiBaseUrl = "<- your SignalR Uri ->";
@@ -98,7 +98,7 @@ Azure が提供するサービスとの連携は、Functions のバインディ�
         let accessToken = info.accessToken;
 ```
 <- Your SignalR Uri -> の部分を、各自が構築した SignalR サービスの URL で置き換え、保存する。 
-[services/SampleViewer/scripts/multideviceviewer.html](../services/SampleViewer/multideviceviewer.html) を Chome 等の ウェブブラウザ―で開く。  
+[services/SampleViewer/multideviceviewer.html](../services/SampleViewer/multideviceviewer.html) を Chome 等の ウェブブラウザ―で開く。  
 この HTML ファイルが開かれると、JavaScript のロジックが実行され、SignalR サービスにサブスクライブし、データ受信待ちとなる。<b>datashare</b> にデータが送信されるたびに、ShareEnvData のロジックが起動され、SignalR を経て、データが届き、温度、湿度、大気圧のグラフが、デバイスごとに表示される。  
 
 ---
