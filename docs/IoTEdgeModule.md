@@ -224,6 +224,26 @@ $"FROM devices Where properties.reported.telemetry-config.telemetryCycleMSec <> 
   ShowLog($"Job[{jobId}] is finished.", true, this.Dispatcher);
 ```
 
+---
+## おまけ  
+実習は、ローカルネットに開発用PC と Raspberry Pi を接続して、SSH 接続で行っているが、Raspberry Pi は DHCP 接続のため、IP アドレスが接続の度に代わる場合があり、その都度、ディスプレイやマウスを Raspberry Pi に接続して確認が必要となる。これは非常に煩雑であるので、接続時に Raspberry Pi のローカルネットの IP アドレスを Reported Properties で通知するモジュールを追加する。  
+「[簡易版](#簡易版)」で学んだ方法で、以下のモジュールを追加する。 
+- モジュール名 '<b>gethostipaddress</b>'
+- Image Uri  '<b>embeddedgeorge/gethostipaddresspython:0.0.1-arm32v7</b>
+- Create Option
+```json
+{
+  "HostConfig": {
+    "NetworkMode": "host",
+    "Privileged": true
+  },
+  "NetworkingConfig": {
+    "EndpointsConfig": {
+      "host": {}
+    }
+  }
+}```
+Raspberry Pi 起動時に確定した、IP アドレスが、追加したモジュールのツインの Reported Properties に表示される。 
 
 --- 
 [次のステップに進む](StreamAnalytics.md)
