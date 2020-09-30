@@ -25,11 +25,11 @@ Preference → Raspberry Pi Configuration
 
 ---
 ### ハンズオン用 SW の準備  
-Raspberry Pi のシェル上で、以下のコマンドを実行して、このハンズオンのリポジトリをクローンし、SW を準備する。 
+開発用PCで、以下のコマンドを実行して、このハンズオンのリポジトリをクローンし、SW を準備する。 
  ```
  $ git clone https://github.com/ms-iotkithol-jp/environment-sensing-hands-on.git
  ```
-この作業は、Raspberry Pi にディスプレイ、マウス、キーボードを接続して、デスクトップ上で実行してもよいし、Windows PC で、Putty を使って、SSH接続し、そのシェルで実行してもよい。  
+
 ※ このハンズオンでは、Putty を使っての実習を想定している。
 
 -----------
