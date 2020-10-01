@@ -53,6 +53,16 @@
             "timeToLiveSecs": 7200
           }
         }
+      },
+      "BarometerSensing": {
+        "properties.desired": {
+          "telemetryConfig": {
+            "telemetryCycleMSec": 1000,
+            "temperatureAvailable": true,
+            "humidityAvailable": true,
+            "pressureAvailable": true
+          }
+        }
       }
     }
   }

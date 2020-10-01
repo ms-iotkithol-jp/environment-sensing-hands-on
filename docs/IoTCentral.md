@@ -54,10 +54,13 @@ Azure IoT Central は、Azure IoT Hub、[DPS（Device Provisioning Service）](h
 ※ <b>[services/IoTCentral/manifest.json](../services/IoTCentral/manifest.json)</b> は、Azure ポータルを使って、IoT Edge Module の配置を行った際に、最後に表示された JSON ファイルである。VS Code による開発の場合は、[device/EdgeSolution](device/EdgeSolution) で、'Build and Push IoT Edge Solution' を実行した際 [device/EdgeSolution/deployment.template.json](../device/EdgeSolution/deployment.template.json) を元にして、config フォルダーに生成される。  
 
 ### インターフェイスの定義  
-IoT Edge デバイスから送信されてくるテレメトリーデータを定義する。  
+IoT Edge デバイスの BarometerSensing モジュールから送信されてくるテレメトリーデータを定義する。  
 ![add-interface](../images/iot-central/4-add-interface.png)  
 
-'+ Add interface' → 'Custom' と選択し、'+ Add capability' で、IoT Edge デバイスから JSON フォーマットで送られてくる各項目を追加していく。図の最後は、<b>temperature</b> の設定部分である。以下を参考に全てのプロパティを追加する。  
+'+ Add interface' → 'Custom' と選択し、'+ Add capability' で、IoT Edge デバイスから JSON フォーマットで送られてくる各項目を追加していく。  
+※ インターフェイスの定義の階層を間違えないように注意すること。  
+
+図の最後は、<b>temperature</b> の設定部分である。以下を参考に全てのプロパティを追加する。  
 
 |property|Capability type|Semantic type|Schema|
 |---|---|---|---|
