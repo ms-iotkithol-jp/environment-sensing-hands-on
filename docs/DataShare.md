@@ -181,7 +181,7 @@ Azure ポータルで、作成した Function App を開き、'構成'をクリ�
 - destination_EVENTHUB
 
 の二つの接続文字列を追加する。  
-'iothub-connection-string' は、ConnectionStrings のパートに定義しているので、接続文字列として設定する。
+'iothub_connection_string' は、ConnectionStrings のパートに定義しているので、接続文字列として設定する。
 ![add-cs](../images/datashare/add-connection-string.png)
 種類は、'Custom' を選択。  
 全てを設定し終えたら、忘れずに'保存'をクリックして反映させる。  

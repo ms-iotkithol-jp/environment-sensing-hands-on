@@ -130,13 +130,10 @@
                 return;
             }
             var mt = message.measured_time.split('T');
-            var sendTime = Date.parse(mt[0] + ' ' + mt[1]);
-            var tickFromStart = sendTime - startTime.getTime();
-            tickFromStart /= 1000;
             if (!deviceData[message.deviceid]) {
                 addGraphPart(graphTable, message.deviceid);
             }
-            deviceData[message.deviceid]["time"].push(Math.round(tickFromStart));
+            deviceData[message.deviceid]["time"].push(mt[1]);
             deviceData[message.deviceid]["temperature"].push(message.temperature);
             deviceData[message.deviceid]["humidity"].push(message.humidity);
             deviceData[message.deviceid]["pressure"].push(message.pressure);

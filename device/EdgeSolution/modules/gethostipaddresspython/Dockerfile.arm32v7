@@ -1,0 +1,15 @@
+FROM balenalib/raspberry-pi:buster
+
+RUN apt-get update
+RUN apt-get -y install python3-pip
+
+RUN pip3 --version
+
+WORKDIR /app
+
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
+
+COPY . .
+
+CMD [ "python3", "-u", "./main.py" ]
