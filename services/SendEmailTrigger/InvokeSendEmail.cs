@@ -27,6 +27,7 @@ namespace EG.IoT.Environment
 
             if (string.IsNullOrEmpty(logicAppUri)) {
                 var config = new ConfigurationBuilder().SetBasePath(context.FunctionAppDirectory).AddJsonFile("local.settings.json",optional:true, reloadOnChange: true).AddEnvironmentVariables().Build();
+                // あれ？これでいいんでしたっけ？ 名前が違う？
                 logicAppUri = config.GetConnectionString("logic_app_uri");
             }
 

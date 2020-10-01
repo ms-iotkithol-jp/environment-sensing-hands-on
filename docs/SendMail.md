@@ -73,6 +73,9 @@ VS Code で、[services/SendEmailTrigger](../services/SendEmailTrigger) を開�
 
 以上で設定は完了である。「[環境データの共有](DataShare.md#Azure-へのデプロイ)」で実習した方法で、ローカルテストと、Azure へのデプロイを行う。  
 
+※ そのまま動かすと正しく動きません。[InvokeSendEmail.cs](../services/SendEmailTrigger/InvokeSendEmail.cs) を良ーく見て、間違いを直してください。  
+
+
 以上で、このステップは実習完了である。
 
 ---
