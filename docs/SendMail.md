@@ -108,7 +108,14 @@ Event Hub で受信したデータを元に、Logic App を起動するロジッ
     }
 ```
 Logic App の起動は、HttpClient クラスを使っている。  
-Stream Analytics は、30度を超えた温度を抽出して継続的に送ってくるので、複数のメールが一度に送信されないように工夫をいれている。  
+Stream Analytics は、30度を超えた温度を抽出して継続的に送ってくるので、複数のメールが一度に送信されないように工夫をいれている。
+
+…と書いたが、実はこのロジックは実用のレベルを満たさない。グラフ表示を確認後、どこが問題なのか考察し、デバイスごとに温度が閾値を超えた時点でだけ確実にメールが送信されるよう改造すること。  
+
+ヒント1：実際のシステムでは、複数のデバイスからデータが送られてくる。その場合に何が起こるか考えるとよい。  
+
+ヒント2: Function だけで解決するのは多分無理。 「[Azure Stream Analytics での一般的なクエリ パターン](https://docs.microsoft.com/ja-jp/azure/stream-analytics/stream-analytics-stream-analytics-query-patterns#calculation-over-past-events)」を参考に Stream Analytics のクエリーを修正するとよい。
+
 
 ---
 [次のステップへ](IoTCentral.md)
