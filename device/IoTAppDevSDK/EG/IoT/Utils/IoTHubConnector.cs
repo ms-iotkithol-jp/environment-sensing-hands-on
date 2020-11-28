@@ -10,6 +10,8 @@ namespace EG.IoT.Utils
 {
     public interface IoTHubConnector
     {
+        public static string PnPModelId = "dtmi:embeddedgeorge:environmenthol:envirnmentsensing;1";
+
         public Task Initialize(
             ConnectionStatusChangesHandler connectionStatusHander,
             MessageHandler messageCallback,

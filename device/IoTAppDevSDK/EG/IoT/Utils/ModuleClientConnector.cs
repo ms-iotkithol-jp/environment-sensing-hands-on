@@ -28,7 +28,13 @@ namespace EG.IoT.Utils
 
         public async Task Initialize(ConnectionStatusChangesHandler connectionStatusHander, MessageHandler messageCallback, DesiredPropertyUpdateCallback twinCallback, MethodCallback methodCallback, object context, CancellationToken ct)
         {
-            moduleClient = await ModuleClient.CreateFromEnvironmentAsync(envSettings);
+            var option = new ClientOptions
+            {
+                ModelId = IoTHubConnector.PnPModelId
+            };
+            moduleClient = await ModuleClient.CreateFromEnvironmentAsync(envSettings, options:option);
+            Console.WriteLine($"Connected to Edge Hub as Plug and Play Model Id={IoTHubConnector.PnPModelId}");
+
             await moduleClient.OpenAsync();
 
             moduleClient.SetConnectionStatusChangesHandler(connectionStatusHander);

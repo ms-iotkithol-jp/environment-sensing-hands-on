@@ -35,9 +35,8 @@ namespace EG.IoT.EnvironmentSensing
             };
         }
 
-        private readonly string desiredPropTelemetryConfigKey = "telemetry-config";
-        string messageInputName = null;
-        string messageOutputName = null;
+        private readonly string desiredPropTelemetryConfigKey = "request_telemetry_config";
+        private readonly string reportedPropTelemetryConfigKey = "current_telemetry_config";
 
         public async Task Initialize(CancellationToken ct)
         {
@@ -50,7 +49,7 @@ namespace EG.IoT.EnvironmentSensing
 
             await CheckDeviceTwins();
             var reported = new TwinCollection();
-            reported[desiredPropTelemetryConfigKey] = new TwinCollection(Newtonsoft.Json.JsonConvert.SerializeObject(telemetryConfig));
+            reported[reportedPropTelemetryConfigKey] = new TwinCollection(Newtonsoft.Json.JsonConvert.SerializeObject(telemetryConfig));
             await iothubClient.UpdateReportedPropertiesAsync(reported);
 
             SendTelemetryMessages(ct);
@@ -128,7 +127,7 @@ namespace EG.IoT.EnvironmentSensing
         private async Task UpdateConfigToReportedProperties()
         {
             var reported = new TwinCollection();
-            reported[desiredPropTelemetryConfigKey] = new TwinCollection(Newtonsoft.Json.JsonConvert.SerializeObject(telemetryConfig));
+            reported[reportedPropTelemetryConfigKey] = new TwinCollection(Newtonsoft.Json.JsonConvert.SerializeObject(telemetryConfig));
             await iothubClient.UpdateReportedPropertiesAsync(reported);
             showConsoleLog("Updated - reported properties");
         }
