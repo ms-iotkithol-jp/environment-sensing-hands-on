@@ -34,7 +34,7 @@ class BlobFileUploader():
             print('Failed to create container - {0}'.format(e))
 
     async def uploadFile(self, fileName):
-        blobName = '{0}-{1}'.format(self.edgeId, os.path.basename(fileName))
+        blobName = '{0}/{1}'.format(self.edgeId, os.path.basename(fileName))
         blobClient = self.containerClient.get_blob_client(blobName)
         try:
             with open(fileName,'rb') as data:
