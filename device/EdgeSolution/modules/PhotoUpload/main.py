@@ -21,9 +21,19 @@ PHOTO_DATA_FOLDER = ""
 EDGE_DEVICEID = ""
 
 uploadCycleSecKey = "upload_cycle_sec"
+uploadCycleSecReportedKey = "current_upload_cycle_sec"
+uploadStatusReportedKey = "photo_uploading"
 uploadCycleSec = 10
 quitFlag = False
 uploadStared = False
+
+def updateReportedTwin(module_client):
+    global uploadCycleSec, uploadStared, uploadCycleSecReportedKey, uploadStatusReportedKey
+    reported = {
+        uploadCycleSecReportedKey: uploadCycleSec,
+        uploadStatusReportedKey: uploadStared
+    }
+    module_client.patch_twin_reported_properties(reported)
 
 async def main(videoPath, fileUploader):
     global uploadCycleSecKey, uploadCycleSec, quitFlag
@@ -42,6 +52,7 @@ async def main(videoPath, fileUploader):
         dtwin = currentTwin['desired']
         if uploadCycleSecKey in dtwin:
             uploadCycleSec = dtwin[uploadCycleSecKey]
+            updateReportedTwin(module_client)
 
         # define behavior for receiving an input message on input1
         def twin_patch_listener(module_client, param_lock):
@@ -55,6 +66,7 @@ async def main(videoPath, fileUploader):
                     uploadCycleSec = data[uploadCycleSecKey]
                     param_lock.release()
                     print("Updated {}={}".format(uploadCycleSecKey, uploadCycleSec))
+                    updateReportedTwin(module_client)
                 param_lock.acquire()
                 isBreak = quitFlag
                 param_lock.release()
@@ -120,12 +132,14 @@ async def main(videoPath, fileUploader):
                         param_lock.release()
                         response['message'] ="Upload started."
                         print("Received - Start order")
+                        updateReportedTwin(module_client)
                     elif methodRequest.name == "Stop":
                         param_lock.acquire()
                         uploadStared = False
                         param_lock.release()
                         response['message'] ="Upload stopped."
                         print("Received - Stop order")
+                        updateReportedTwin(module_client)
                     else:
                         response['message'] = "bad method name"
                         response_status = 404
