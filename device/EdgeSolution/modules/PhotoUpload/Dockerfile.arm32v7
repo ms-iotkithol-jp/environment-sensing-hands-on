@@ -33,7 +33,7 @@ RUN install_packages \
     # for video files
     libavcodec-dev libavformat-dev libswscale-dev libv4l-dev \
     # for gui
-    libqt4-test libqtgui4 libqtwebkit4 libgtk3-dev \
+    libqt4-test libqtgui4 libqtwebkit4 libgtk2.0-dev \
     libcanberra-gtk* \
     libatlas-base-dev gfortran \
     # high def image processing

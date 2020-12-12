@@ -270,7 +270,7 @@ namespace EG.IoT.EnvironmentSensing
 
         private void statusChangesHandlerMethod(ConnectionStatus status, ConnectionStatusChangeReason reason)
         {
-            showConsoleLog($"IoT Hub Status Changed- status={status}, reason={reason}");
+            showConsoleLog($"IoT Hub Status Changed - status={status}, reason={reason}");
         }
 
 
@@ -280,11 +280,11 @@ namespace EG.IoT.EnvironmentSensing
             string showMsg = msg;
             if (addTimestamp)
             {
-                showMsg = timestamp + msg;
+                showMsg = $"{timestamp} ${msg}";
             }
             else
             {
-                showMsg = "  " + msg;
+                showMsg = $"  {msg}";
             }
             Console.WriteLine($"{showMsg}");
         }

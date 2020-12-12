@@ -13,6 +13,7 @@ from subprocess import PIPE
 from azure.iot.device.aio import IoTHubModuleClient
 
 async def main():
+    reportedPropertyKey = "networkInfo"
     try:
         if not sys.version >= "3.5.3":
             raise Exception( "The sample requires python 3.5.3+. Current version of Python: %s" % sys.version )
@@ -35,8 +36,8 @@ async def main():
                 netinfo[netname] = ipaddress
                 print('Found - {}'.format(ipaddress))
 
-        reported_properties = {"network-info": netinfo}
-        print("Setting reported network info to {}".format(reported_properties["network-info"]))
+        reported_properties = {reportedPropertyKey: netinfo}
+        print("Setting reported network info to {}".format(reported_properties[reportedPropertyKey]))
         await module_client.patch_twin_reported_properties(reported_properties)
 
 

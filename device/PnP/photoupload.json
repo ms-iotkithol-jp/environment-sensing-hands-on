@@ -2,12 +2,23 @@
   "@context": "dtmi:dtdl:context;2",
   "@id": "dtmi:embeddedgeorge:environmenthol:photoupload;1",
   "@type": "Interface",
-  "displayName": "photoupload",
+  "displayName": "Photo Upload Module",
   "contents": [
+    {
+      "@type": "Telemetry",
+      "name": "timestamp",
+      "schema": "dateTime"
+    },
+    {
+      "@type": "Telemetry",
+      "name": "filename",
+      "displayName": "Uploaded File Name",
+      "schema": "string"
+    },
     {
       "@type": "Property",
       "name": "upload_cycle_sec",
-      "displayName": "Upload Cycle Cec",
+      "displayName": "Upload Cycle Sec",
       "schema": "integer",
       "writable": true
     },
@@ -28,6 +39,20 @@
       "name": "Start",
       "description": "Start to take and upload photo file",
       "commandType": "synchronous",
+      "request": {
+        "name": "photo_upload_notify",
+        "displayName": "Upload Notification",
+        "schema": {
+          "@type": "Object",
+          "fields": [
+            {
+              "name": "photo_upload_notify",
+              "displayName": "Is Photo Upload Notify",
+              "schema": "boolean"
+            }
+          ]
+        }
+      },
       "response": {
         "name": "message",
         "schema": "string"

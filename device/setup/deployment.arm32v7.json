@@ -1,0 +1,167 @@
+{
+    "modulesContent": {
+        "$edgeAgent": {
+            "properties.desired": {
+                "modules": {
+                    "BarometerSensing": {
+                        "settings": {
+                            "image": "embeddedgeorge/barometersensing:0.2.1-arm32v7",
+                            "createOptions": "{\"HostConfig\":{\"Binds\":[\"/dev/i2c-1:/dev/i2c-1\"],\"Privileged\":true,\"Devices\":[{\"PathOnHost\":\"/dev/i2c-1\",\"PathInContainer\":\"/dev/i2c-1\",\"CgroupPermissions\":\"mrw\"}]}}"
+                        },
+                        "type": "docker",
+                        "version": "1.0",
+                        "status": "running",
+                        "restartPolicy": "always"
+                    },
+                    "getipaddresspython": {
+                        "settings": {
+                            "image": " embeddedgeorge/gethostipaddresspython:1.0.0-arm32v7",
+                            "createOptions": "{\"HostConfig\":{\"NetworkMode\":\"host\",\"Privileged\":true},\"NetworkingConfig\":{\"EndpointsConfig\":{\"host\":{}}}}"
+                        },
+                        "type": "docker",
+                        "version": "1.0",
+                        "status": "running",
+                        "restartPolicy": "always"
+                    },
+                    "testbinding": {
+                        "settings": {
+                            "image": "embeddedgeorge/testbinding:0.0.1-arm32v7",
+                            "createOptions": "{\"HostConfig\":{\"Privileged\":true,\"Binds\":[\"/dev:/dev\",\"/lib/firmware:/lib/firmware\"]}}"
+                        },
+                        "type": "docker",
+                        "version": "1.0",
+                        "status": "running",
+                        "restartPolicy": "always"
+                    },
+                    "photoupload": {
+                        "settings": {
+                            "image": "embeddedgeorge/photoupload:0.1.0-arm32v7",
+                            "createOptions": "{\"HostConfig\":{\"Binds\":[\"/data/photos:/photos\"],\"Privileged\":true,\"Devices\":[{\"PathOnHost\":\"/dev/video0\",\"PathInContainer\":\"/dev/video0\",\"CgroupPermissions\":\"mrw\"}]}}"
+                        },
+                        "type": "docker",
+                        "version": "1.0",
+                        "env": {
+                            "BLOB_ON_EDGE_MODULE": {
+                                "value": "AzureBlobStorageonIoTEdge"
+                            },
+                            "BLOB_ON_EDGE_ACCOUNT_NAME": {
+                                "value": "localaccount"
+                            },
+                            "BLOB_ON_EDGE_ACCOUNT_KEY": {
+                                "value": "rhCGXr1cII7EMvD2xrv7tA=="
+                            },
+                            "PHOTO_CONTAINER_NAME": {
+                                "value": "photos"
+                            },
+                            "PHOTO_DATA_FOLDER": {
+                                "value": "/photos"
+                            }
+                        },
+                        "status": "running",
+                        "restartPolicy": "always"
+                    },
+                    "AzureBlobStorageonIoTEdge": {
+                        "settings": {
+                            "image": "mcr.microsoft.com/azure-blob-storage",
+                            "createOptions": "{\"HostConfig\":{\"Binds\":[\"/srv/containerdata:/blobroot\",\"/data/photos:/photos\"],\"PortBindings\":{\"11002/tcp\":[{\"HostPort\":\"11002\"}]}}}"
+                        },
+                        "type": "docker",
+                        "version": "1.0",
+                        "env": {
+                            "LOCAL_STORAGE_ACCOUNT_NAME": {
+                                "value": "localaccount"
+                            },
+                            "LOCAL_STORAGE_ACCOUNT_KEY": {
+                                "value": "rhCGXr1cII7EMvD2xrv7tA=="
+                            }
+                        },
+                        "status": "running",
+                        "restartPolicy": "always"
+                    }
+                },
+                "runtime": {
+                    "settings": {
+                        "minDockerVersion": "v1.25",
+                        "registryCredentials": {
+                            "egacriotkitholv5": {
+                                "address": "egacriotkitholv5.azurecr.io",
+                                "password": "6XvdrE7LPf=4ETvoDH3PrU4pGZ6hj9aN",
+                                "username": "egacriotkitholv5"
+                            }
+                        }
+                    },
+                    "type": "docker"
+                },
+                "schemaVersion": "1.0",
+                "systemModules": {
+                    "edgeAgent": {
+                        "settings": {
+                            "image": "mcr.microsoft.com/azureiotedge-agent:1.2.0-rc1",
+                            "createOptions": ""
+                        },
+                        "type": "docker"
+                    },
+                    "edgeHub": {
+                        "settings": {
+                            "image": "mcr.microsoft.com/azureiotedge-hub:1.2.0-rc1",
+                            "createOptions": "{\"HostConfig\":{\"PortBindings\":{\"5671/tcp\":[{\"HostPort\":\"5671\"}],\"8883/tcp\":[{\"HostPort\":\"8883\"}],\"443/tcp\":[{\"HostPort\":\"443\"}]}}}"
+                        },
+                        "type": "docker",
+                        "status": "running",
+                        "restartPolicy": "always"
+                    }
+                }
+            }
+        },
+        "$edgeHub": {
+            "properties.desired": {
+                "routes": {
+                    "BarometerSensingToIoTHub": "FROM /messages/modules/BarometerSensing/outputs/* INTO $upstream",
+                    "PhotoUploadToIoTHub": "FROM /messages/modules/photoupload/outputs/* INTO $upstream"
+                },
+                "schemaVersion": "1.0",
+                "storeAndForwardConfiguration": {
+                    "timeToLiveSecs": 7200
+                }
+            }
+        },
+        "BarometerSensing": {
+            "properties.desired": {
+                "request_telemetry_config": {
+                    "telemetryCycleMSec": 5000
+                }
+            }
+        },
+        "getipaddresspython": {
+            "properties.desired": {}
+        },
+        "testbinding": {
+            "properties.desired": {}
+        },
+        "photoupload": {
+            "properties.desired": {
+                "upload_cycle_sec": 30
+            }
+        },
+        "AzureBlobStorageonIoTEdge": {
+            "properties.desired": {
+                "deviceAutoDeleteProperties": {
+                    "deleteOn": true,
+                    "deleteAfterMinutes": 5,
+                    "retainWhileUploading": true
+                },
+                "deviceToCloudUploadProperties": {
+                    "uploadOn": true,
+                    "uploadOrder": "OldestFirst",
+                    "cloudStorageConnectionString": "DefaultEndpointsProtocol=https;AccountName=<- storage account name ->;AccountKey=<- SAS Token ->;EndpointSuffix=core.windows.net",
+                    "storageContainersForUpload": {
+                        "photos": {
+                            "target": "sensehat-photo"
+                        }
+                    },
+                    "deleteAfterUpload": true
+                }
+            }
+        }
+    }
+}

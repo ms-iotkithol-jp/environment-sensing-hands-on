@@ -14,6 +14,8 @@ namespace EG.IoT.Utils
         ITransportSettings[] envSettings;
         string msgInputName = null;
         string msgOutputName = null;
+        static string PnPModelId = "dtmi:embeddedgeorge:BarometerSensing:manage;1";
+
 
         public ModuleClientConnector(ITransportSettings[] settings, string inputName, string outputName)
         {

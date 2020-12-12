@@ -1,0 +1,28 @@
+{
+  "@context": "dtmi:dtdl:context;2",
+  "@id": "dtmi:embeddedgeorge:iotutilities:getipaddress;1",
+  "@type": "Interface",
+  "displayName": "Get IP Address Module",
+  "contents": [
+    {
+      "@type": "Property",
+      "name": "networkInfo",
+      "writable": false,
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "wlan0",
+            "displayName": "Wi-Fi Connection IP Address",
+            "schema": "string"
+          },
+          {
+            "name": "eth0",
+            "displayName": "Wired Connection IP Address",
+            "schema": "string"
+          }
+        ]
+      }
+    }
+  ]
+}

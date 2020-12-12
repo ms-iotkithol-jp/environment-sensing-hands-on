@@ -16,14 +16,16 @@ namespace EG.IoT.Utils
         private object callbackContext;
         CancellationToken cancellationToken;
 
+        static string PnPModelId = "dtmi:embeddedgeorge:environmenthol:barometersensing;1";
+
         public DeviceClientConnector(string connectionString)
         {
             var option = new ClientOptions
             {
-                ModelId = IoTHubConnector.PnPModelId
+                ModelId = DeviceClientConnector.PnPModelId
             };
             deviceClient = DeviceClient.CreateFromConnectionString(connectionString, options: option);
-            Debug.WriteLine($"Connected to IoT Hub as Plug and Play Model Id={IoTHubConnector.PnPModelId}");
+            Debug.WriteLine($"Connected to IoT Hub as Plug and Play Model Id={option.ModelId}");
 
             deviceClient.SetConnectionStatusChangesHandler((status, reason) =>
             {

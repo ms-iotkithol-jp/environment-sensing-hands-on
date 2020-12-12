@@ -1,8 +1,8 @@
 {
   "@context": "dtmi:dtdl:context;2",
-  "@id": "dtmi:embeddedgeorge:environmenthol:envirnmentsensing;1",
+  "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing;1",
   "@type": "Interface",
-  "displayName": "Envirnmet Sensng HoL",
+  "displayName": "Barometer Sensing",
   "contents": [
     {
       "@type": "Telemetry",

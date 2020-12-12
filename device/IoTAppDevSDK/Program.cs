@@ -68,6 +68,7 @@ namespace IoTAppDevSDK
 
             var key = Console.ReadLine();
             Console.WriteLine("End Apps");
+            tokenSource.Cancel();
             Thread.Sleep(5000);
 
             sensingDevice.Terminate().Wait();

@@ -8,7 +8,7 @@ import sys
 import asyncio
 from six.moves import input
 import threading
-from azure.iot.device import IoTHubModuleClient, MethodResponse
+from azure.iot.device import IoTHubModuleClient, MethodResponse, Message
 from blobfileuploader import BlobFileUploader
 import cv2
 import datetime
@@ -23,9 +23,12 @@ EDGE_DEVICEID = ""
 uploadCycleSecKey = "upload_cycle_sec"
 uploadCycleSecReportedKey = "current_upload_cycle_sec"
 uploadStatusReportedKey = "photo_uploading"
+uploadNotifyStatusKey = "photo_upload_notify"
 uploadCycleSec = 10
 quitFlag = False
 uploadStared = False
+uploadNotifyStatus = False
+uploadNotifyOutputName = "upload_notification"
 
 def updateReportedTwin(module_client):
     global uploadCycleSec, uploadStared, uploadCycleSecReportedKey, uploadStatusReportedKey
@@ -74,8 +77,8 @@ async def main(videoPath, fileUploader):
                     print("twin patch listener will be finished")
                     break
 
-        async def upload_photo_handler(videoPath, uploader, param_lock):
-            global PHOTO_DATA_FOLDER, uploadCycleSec, uploadStared
+        async def upload_photo_handler(videoPath, uploader, module_client, param_lock):
+            global PHOTO_DATA_FOLDER, uploadCycleSec, uploadStared, uploadNotifyOutputName, uploadNotifyStatus
             await uploader.initialize()
             print("upload photo handler started.")
             try:
@@ -92,6 +95,7 @@ async def main(videoPath, fileUploader):
                     param_lock.acquire()
                     sleepTime = uploadCycleSec
                     isUpload = uploadStared
+                    isNotify = uploadNotifyStatus
                     param_lock.release()
 
                     time.sleep(sleepTime)
@@ -105,6 +109,11 @@ async def main(videoPath, fileUploader):
                         print("Saved photo file")
                         await uploader.uploadFile(filename)
                         os.remove(filename)
+                        if isNotify:
+                            notifyMsg = "{\"timestamp\":\"%s\",\"filename\":\"%s\"}"
+                            msg = notifyMsg % (datetime.datetime.utcnow().isoformat(), photoFileName)
+                            sendMsg = Message(msg)
+                            module_client.send_message_to_output(sendMsg, uploadNotifyOutputName)
                     else:
                         print("Waiting for start")
                     param_lock.acquire()
@@ -118,7 +127,7 @@ async def main(videoPath, fileUploader):
                 print('upload photo handler exception - {}'.format(error)) 
 
         def direct_method_listener(module_client, param_lock):
-            global uploadStared
+            global uploadStared, uploadNotifyStatus
             while True:
                 try:
                     print("waiting for method invocation...")
@@ -127,11 +136,18 @@ async def main(videoPath, fileUploader):
                     response = {}
                     response_status = 200
                     if methodRequest.name == "Start":
+                        response['message'] ="Upload started."
                         param_lock.acquire()
                         uploadStared = True
+                        if (methodRequest.payload is None) == False:
+                            if uploadNotifyStatusKey in methodRequest.payload:
+                                uploadNotifyStatus = methodRequest.payload[uploadNotifyStatusKey]
+                            else:
+                                response['message'] = "payload should be '{\"" + uploadCycleSecKey + "\": true|false}"
                         param_lock.release()
-                        response['message'] ="Upload started."
                         print("Received - Start order")
+                        if uploadNotifyStatus:
+                            print("  with notofication")
                         updateReportedTwin(module_client)
                     elif methodRequest.name == "Stop":
                         param_lock.acquire()
@@ -144,10 +160,11 @@ async def main(videoPath, fileUploader):
                         response['message'] = "bad method name"
                         response_status = 404
                         print("Bad Method Request!")
-                    methodResponse = MethodResponse(methodRequest.request_id, response_status, payload=response)
-                    module_client.send_method_response(methodResponse)
                 except Exception as error:
                     print("exception happens - {}".format(error))
+                    response['message'] = "Exception - {}".format(error)
+                methodResponse = MethodResponse(methodRequest.request_id, response_status, payload=response)
+                module_client.send_method_response(methodResponse)
 
         param_lock = threading.Lock()
 
@@ -164,7 +181,7 @@ async def main(videoPath, fileUploader):
 #        uploadPhotoThread.start()
 
         # Schedule task for Photo Uploader
-        listeners = asyncio.gather(upload_photo_handler(videoPath, fileUploader, param_lock))
+        listeners = asyncio.gather(upload_photo_handler(videoPath, fileUploader, module_client, param_lock))
 
         print ( "The sample is now waiting for direct method and desired twin update. ")
 

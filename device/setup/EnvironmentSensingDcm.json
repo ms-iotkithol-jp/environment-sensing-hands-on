@@ -1,0 +1,592 @@
+[
+  {
+    "@id": "dtmi:embeddedgeorge:capabilitymodel:environmentsensing;1",
+    "@type": "Interface",
+    "contents": [
+      {
+        "@id": "dtmi:embeddedgeorge:capabilitymodel:environmentsensing:BarometerSensing;1",
+        "@type": [
+          "Relationship",
+          "EdgeModule"
+        ],
+        "displayName": {
+          "en": "BarometerSensing"
+        },
+        "maxMultiplicity": 1,
+        "name": "BarometerSensing",
+        "target": [
+          "dtmi:embeddedgeorge:BarometerSensing;1"
+        ]
+      },
+      {
+        "@id": "dtmi:embeddedgeorge:capabilitymodel:environmentsensing:getipaddresspython;1",
+        "@type": [
+          "Relationship",
+          "EdgeModule"
+        ],
+        "displayName": {
+          "en": "getipaddresspython"
+        },
+        "maxMultiplicity": 1,
+        "name": "getipaddresspython",
+        "target": [
+          "dtmi:embeddedgeorge:getipaddresspython;1"
+        ]
+      },
+      {
+        "@id": "dtmi:embeddedgeorge:capabilitymodel:environmentsensing:photoupload;1",
+        "@type": [
+          "Relationship",
+          "EdgeModule"
+        ],
+        "displayName": {
+          "en": "photoupload"
+        },
+        "maxMultiplicity": 1,
+        "name": "photoupload",
+        "target": [
+          "dtmi:embeddedgeorge:photoupload;1"
+        ]
+      },
+      {
+        "@id": "dtmi:embeddedgeorge:capabilitymodel:environmentsensing:AzureBlobStorageonIoTEdge;1",
+        "@type": [
+          "Relationship",
+          "EdgeModule"
+        ],
+        "displayName": {
+          "en": "AzureBlobStorageonIoTEdge"
+        },
+        "maxMultiplicity": 1,
+        "name": "AzureBlobStorageonIoTEdge",
+        "target": [
+          "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge;1"
+        ]
+      }
+    ],
+    "displayName": {
+      "en": "Azure IoT Edge Capability Model environmentsensing"
+    },
+    "@context": [
+      "dtmi:iotcentral:context;2",
+      "dtmi:dtdl:context;2"
+    ]
+  },
+  {
+    "@id": "dtmi:embeddedgeorge:BarometerSensing;1",
+    "@type": "Interface",
+    "contents": [],
+    "displayName": {
+      "en": "Module BarometerSensing"
+    },
+    "extends": [
+      "dtmi:embeddedgeorge:BarometerSensing:manage;1"
+    ],
+    "@context": [
+      "dtmi:iotcentral:context;2",
+      "dtmi:dtdl:context;2"
+    ]
+  },
+  {
+    "@context": [
+      "dtmi:iotcentral:context;2",
+      "dtmi:dtdl:context;2"
+    ],
+    "@id": "dtmi:embeddedgeorge:BarometerSensing:manage;1",
+    "@type": "Interface",
+    "contents": [
+      {
+        "@id": "dtmi:embeddedgeorge:BarometerSensing:manage:temperature;1",
+        "@type": [
+          "Telemetry",
+          "Temperature"
+        ],
+        "displayName": {
+          "en": "Temperature"
+        },
+        "name": "temperature",
+        "schema": "double",
+        "unit": "degreeCelsius"
+      },
+      {
+        "@id": "dtmi:embeddedgeorge:BarometerSensing:manage:humidity;1",
+        "@type": [
+          "Telemetry",
+          "Humidity"
+        ],
+        "displayName": {
+          "en": "Humidity"
+        },
+        "name": "humidity",
+        "schema": "double",
+        "unit": "percent"
+      },
+      {
+        "@id": "dtmi:embeddedgeorge:BarometerSensing:manage:Pressure;1",
+        "@type": [
+          "Telemetry",
+          "Pressure"
+        ],
+        "displayName": {
+          "en": "Pressure"
+        },
+        "name": "pressure",
+        "schema": "double",
+        "unit": "pascal"
+      },
+      {
+        "@id": "dtmi:embeddedgeorge:BarometerSensing:manage:timestamp;1",
+        "@type": "Telemetry",
+        "displayName": {
+          "en": "Timestamp"
+        },
+        "name": "timestamp",
+        "schema": "dateTime"
+      },
+      {
+        "@id": "dtmi:embeddedgeorge:BarometerSensing:manage:StartTelemetry;1",
+        "@type": "Command",
+        "commandType": "synchronous",
+        "displayName": {
+          "en": "Start Telemetry"
+        },
+        "name": "StartTelemetry"
+      },
+      {
+        "@id": "dtmi:embeddedgeorge:BarometerSensing:manage:StopTelemetry;1",
+        "@type": "Command",
+        "commandType": "synchronous",
+        "displayName": {
+          "en": "Stop Telemetry"
+        },
+        "name": "StopTelemetry"
+      },
+      {
+        "@id": "dtmi:embeddedgeorge:BarometerSensing:manage:Alert;1",
+        "@type": "Command",
+        "commandType": "synchronous",
+        "displayName": {
+          "en": "Alert Control"
+        },
+        "request": {
+          "@id": "dtmi:embeddedgeorge:BarometerSensing:manage:Alert:request;1",
+          "@type": "CommandPayload",
+          "displayName": {
+            "en": "Rquest Payload"
+          },
+          "name": "RequestPayload",
+          "schema": {
+            "@type": "Object",
+            "fields": [
+              {
+                "@id": "dtmi:embeddedgeorge:BarometerSensing:manage:Alert:request:value;1",
+                "name": "value",
+                "schema": {
+                  "@type": "Enum",
+                  "valueSchema": "string",
+                  "enumValues": [
+                    {
+                      "name": "on",
+                      "enumValue": "on"
+                    },
+                    {
+                      "name": "off",
+                      "enumValue": "off"
+                    }
+                  ]  
+                }
+              }
+            ]
+          }
+        },
+        "name": "Alert"
+      },
+      {
+        "@id": "dtmi:embeddedgeorge:BarometerSensing:manage:request_telemetry_config;1",
+        "@type": "Property",
+        "displayName": {
+          "en": "Telemetry Confguration Setting"
+        },
+        "name": "request_telemetry_config",
+        "schema": {
+          "@id": "dtmi:embeddedgeorge:BarometerSensing:manage:request_telemetry_config:schema;1",
+          "@type": "Object",
+          "fields": [
+            {
+              "@id": "dtmi:embeddedgeorge:BarometerSensing:manage:request_telemetry_config:schema:telemetryCycleMSec;1",
+              "name": "telemetryCycleMSec",
+              "displayName": {
+                "en": "Telemetry Cycle msec"
+              },
+              "schema": "integer"
+            },
+            {
+              "@id": "dtmi:embeddedgeorge:BarometerSensing:manage:request_telemetry_config:schema:temperatureAvailable;1",
+              "name": "temperatureAvailable",
+              "displayName": {
+                "en": "Tempertur Measurment Available"
+              },
+              "schema": "boolean"
+            },
+            {
+              "@id": "dtmi:embeddedgeorge:BarometerSensing:manage:request_telemetry_config:schema:humidityAvailable;1",
+              "name": "humidityAvailable",
+              "displayName": {
+                "en": "Humidity Measurment Available"
+              },
+              "schema": "boolean"
+            },
+            {
+              "@id": "dtmi:embeddedgeorge:BarometerSensing:manage:request_telemetry_config:schema:pressureAvailable;1",
+              "name": "pressureAvailable",
+              "displayName": {
+                "en": "Pressure Measurment Available"
+              },
+              "schema": "boolean"
+            }
+          ]
+        },
+        "writable": true
+      },
+      {
+        "@id": "dtmi:embeddedgeorge:BarometerSensing:manage:current_telemetry_config;1",
+        "@type": "Property",
+        "displayName": {
+          "en": "Current Telemetry Configuration"
+        },
+        "name": "current_telemetry_config",
+        "schema": {
+          "@id": "dtmi:embeddedgeorge:BarometerSensing:manage:current_telemetry_config:schema;1",
+          "@type": "Object",
+          "fields": [
+            {
+              "@id": "dtmi:embeddedgeorge:BarometerSensing:manage:current_telemetry_config:schema:telemetryCycleMSec;1",
+              "name": "telemetryCycleMSec",
+              "displayName": {
+                "en": "Telemetry Cycle msec"
+              },
+              "schema": "integer"
+            },
+            {
+              "@id": "dtmi:embeddedgeorge:BarometerSensing:manage:current_telemetry_config:schema:temperatureAvailable;1",
+              "name": "temperatureAvailable",
+              "displayName": {
+                "en": "Tempertur Measurment Available"
+              },
+              "schema": "boolean"
+            },
+            {
+              "@id": "dtmi:embeddedgeorge:BarometerSensing:manage:current_telemetry_config:schema:humidityAvailable;1",
+              "name": "humidityAvailable",
+              "displayName": {
+                "en": "Humidity Measurment Available"
+              },
+              "schema": "boolean"
+            },
+            {
+              "@id": "dtmi:embeddedgeorge:BarometerSensing:manage:current_telemetry_config:schema:pressureAvailable;1",
+              "name": "pressureAvailable",
+              "displayName": {
+                "en": "Pressure Measurment Available"
+              },
+              "schema": "boolean"
+            }
+          ]
+        },
+        "writable": false
+      }
+    ],
+    "displayName": {
+      "en": "Manage"
+    }
+  },
+  {
+    "@id": "dtmi:embeddedgeorge:getipaddresspython;1",
+    "@type": "Interface",
+    "contents": [],
+    "displayName": {
+      "en": "Module getipaddresspython"
+    },
+    "extends": [
+      "dtmi:embeddedgeorge:getipaddresspython:manage;1"
+    ],
+    "@context": [
+      "dtmi:iotcentral:context;2",
+      "dtmi:dtdl:context;2"
+    ]
+  },
+  {
+    "@context": [
+      "dtmi:iotcentral:context;2",
+      "dtmi:dtdl:context;2"
+    ],
+    "@id": "dtmi:embeddedgeorge:getipaddresspython:manage;1",
+    "@type": "Interface",
+    "contents": [
+      {
+        "@id": "dtmi:embeddedgeorge:getipaddresspython:manage:networkInfo;1",
+        "@type": "Property",
+        "displayName": {
+          "en": "Local Network Informtin"
+        },
+        "name": "networkInfo",
+        "schema": {
+          "@id": "dtmi:embeddedgeorge:getipaddresspython:manage:networkInfo:schema;1",
+          "@type": "Object",
+          "fields": [
+            {
+              "@id": "dtmi:embeddedgeorge:getipaddresspython:manage:networkInfo:schema:wlan0;1",
+              "name": "wlan0",
+              "displayName": {
+                "en": "Wi-Fi Connection IP Address"
+              },
+              "schema": "string"
+            },
+            {
+              "@id": "dtmi:embeddedgeorge:getipaddresspython:manage:networkInfo:schema:eth0;1",
+              "name": "eth0",
+              "displayName": {
+                "en": "Wired Connection IP Address"
+              },
+              "schema": "string"
+            }
+          ]
+        },
+        "writable": false
+      }
+    ],
+    "displayName": {
+      "en": "Manage"
+    }
+  },
+  {
+    "@id": "dtmi:embeddedgeorge:photoupload;1",
+    "@type": "Interface",
+    "contents": [],
+    "displayName": {
+      "en": "Module photoupload"
+    },
+    "extends": [
+      "dtmi:embeddedgeorge:photoupload:manage;1"
+    ],
+    "@context": [
+      "dtmi:iotcentral:context;2",
+      "dtmi:dtdl:context;2"
+    ]
+  },
+  {
+    "@context": [
+      "dtmi:iotcentral:context;2",
+      "dtmi:dtdl:context;2"
+    ],
+    "@id": "dtmi:embeddedgeorge:photoupload:manage;1",
+    "@type": "Interface",
+    "contents": [
+      {
+        "@id": "dtmi:embeddedgeorge:photoupload:manage:filename;1",
+        "@type": [
+          "Telemetry"
+        ],
+        "displayName": {
+          "en": "Uploaded File Name"
+        },
+        "name": "filename",
+        "schema": "string"
+      },
+      {
+        "@id": "dtmi:embeddedgeorge:photoupload:manage:timestamp;1",
+        "@type": "Telemetry",
+        "displayName": {
+          "en": "Timestamp"
+        },
+        "name": "timestamp",
+        "schema": "dateTime"
+      },
+      {
+        "@id": "dtmi:embeddedgeorge:photoupload:manage:Start;1",
+        "@type": "Command",
+        "commandType": "synchronous",
+        "displayName": {
+          "en": "Start Uploading"
+        },
+        "request": {
+          "@id": "dtmi:embeddedgeorge:photoupload:manage:Start:request;1",
+          "@type": "CommandPayload",
+          "name": "RequestPayload",
+          "schema": {
+            "@type": "Object",
+            "fields": [
+              {
+                "@id": "dtmi:embeddedgeorge:photoupload:manage:Start:request:photo_upload_notify;1",
+                "name": "photo_upload_notify",
+                "displayName": "Is Photo Upload Notify",
+                "schema": "boolean"
+              }
+            ]
+            }
+        },
+        "name": "Start"
+      },
+      {
+        "@id": "dtmi:embeddedgeorge:photoupload:manage:Stop;1",
+        "@type": "Command",
+        "commandType": "synchronous",
+        "displayName": {
+          "en": "Stop Uploading"
+        },
+        "name": "Stop"
+      },
+      {
+        "@id": "dtmi:embeddedgeorge:photoupload:manage:upload_cycle_sec;1",
+        "@type": "Property",
+        "displayName": {
+          "en": "Upload Cycle seconds"
+        },
+        "name": "upload_cycle_sec",
+        "schema": "integer",
+        "writable": true
+      },
+      {
+        "@id": "dtmi:embeddedgeorge:photoupload:manage:current_upload_cycle_sec;1",
+        "@type": "Property",
+        "displayName": {
+          "en": "Curret Upload Cycle seconds"
+        },
+        "name": "current_upload_cycle_sec",
+        "schema": "integer",
+        "writable": false
+      },
+      {
+        "@id": "dtmi:embeddedgeorge:photoupload:manage:photo_uploading;1",
+        "@type": "Property",
+        "displayName": {
+          "en": "Photo Uploading Status"
+        },
+        "name": "photo_uploading",
+        "schema": "boolean",
+        "writable": false
+      }
+    ],
+    "displayName": {
+      "en": "Manage"
+    }
+  },
+  {
+    "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge;1",
+    "@type": "Interface",
+    "contents": [],
+    "displayName": {
+      "en": "Module AzureBlobStorageonIoTEdge"
+    },
+    "extends": [
+      "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage;1"
+    ],
+    "@context": [
+      "dtmi:iotcentral:context;2",
+      "dtmi:dtdl:context;2"
+    ]
+  },
+  {
+    "@context": [
+      "dtmi:iotcentral:context;2",
+      "dtmi:dtdl:context;2"
+    ],
+    "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage;1",
+    "@type": "Interface",
+    "contents": [
+      {
+        "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceAutoDeleteProperties;1",
+        "@type": "Property",
+        "displayName": {
+          "en": "deviceAutoDeleteProperties"
+        },
+        "name": "deviceAutoDeleteProperties",
+        "schema": {
+          "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceAutoDeleteProperties:schema;1",
+          "@type": "Object",
+          "fields": [
+            {
+              "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceAutoDeleteProperties:schema:deleteOn;1",
+              "name": "deleteOn",
+              "schema": "boolean"
+            },
+            {
+              "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceAutoDeleteProperties:schema:deleteAfterMinutes;1",
+              "name": "deleteAfterMinutes",
+              "schema": "double"
+            },
+            {
+              "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceAutoDeleteProperties:schema:retainWhileUploading;1",
+              "name": "retainWhileUploading",
+              "schema": "boolean"
+            }
+          ]
+        },
+        "writable": true
+      },
+      {
+        "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceToCloudUploadProperties;1",
+        "@type": "Property",
+        "displayName": {
+          "en": "deviceToCloudUploadProperties"
+        },
+        "name": "deviceToCloudUploadProperties",
+        "schema": {
+          "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceToCloudUploadProperties:schema;1",
+          "@type": "Object",
+          "fields": [
+            {
+              "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceToCloudUploadProperties:schema:uploadOn;1",
+              "name": "uploadOn",
+              "schema": "boolean"
+            },
+            {
+              "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceToCloudUploadProperties:schema:uploadOrder;1",
+              "name": "uploadOrder",
+              "schema": "string"
+            },
+            {
+              "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceToCloudUploadProperties:schema:cloudStorageConnectionString;1",
+              "name": "cloudStorageConnectionString",
+              "schema": "string"
+            },
+            {
+              "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceToCloudUploadProperties:schema:storageContainersForUpload;1",
+              "name": "storageContainersForUpload",
+              "schema": {
+                "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceToCloudUploadProperties:schema:storageContainersForUpload:schema;1",
+                "@type": "Object",
+                "fields": [
+                  {
+                    "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceToCloudUploadProperties:schema:storageContainersForUpload:schema:photos;1",
+                    "name": "photos",
+                    "schema": {
+                      "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceToCloudUploadProperties:schema:storageContainersForUpload:schema:photos:schema;1",
+                      "@type": "Object",
+                      "fields": [
+                        {
+                          "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceToCloudUploadProperties:schema:storageContainersForUpload:schema:photos:schema:target;1",
+                          "name": "target",
+                          "schema": "string"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceToCloudUploadProperties:schema:deleteAfterUpload;1",
+              "name": "deleteAfterUpload",
+              "schema": "boolean"
+            }
+          ]
+        },
+        "writable": true
+      }
+    ],
+    "displayName": {
+      "en": "Manage"
+    }
+  }
+]

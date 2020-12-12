@@ -2,6 +2,7 @@
 using Microsoft.Azure.Devices.Shared;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,9 +16,21 @@ namespace EG.IoT.Utils
         private object callbackContext;
         CancellationToken cancellationToken;
 
+        static string PnPModelId = "dtmi:embeddedgeorge:environmenthol:barometersensing;1";
+
         public DeviceClientConnector(string connectionString)
         {
-            deviceClient = DeviceClient.CreateFromConnectionString(connectionString);
+            var option = new ClientOptions
+            {
+                ModelId = DeviceClientConnector.PnPModelId
+            };
+            deviceClient = DeviceClient.CreateFromConnectionString(connectionString, options: option);
+            Debug.WriteLine($"Connected to IoT Hub as Plug and Play Model Id={option.ModelId}");
+
+            deviceClient.SetConnectionStatusChangesHandler((status, reason) =>
+            {
+                Debug.WriteLine($"Connection status changed - status={status}, reason={reason}");
+            });
         }
 
         public async Task<Twin> GetTwinAsync()
