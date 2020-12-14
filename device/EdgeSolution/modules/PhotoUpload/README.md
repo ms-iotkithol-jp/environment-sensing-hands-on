@@ -11,7 +11,7 @@ PhotoUploadモジュール（[main.py](./main.py)ロジックを使用)を使っ
 行う IoT Edge Module（Docker Image）を作るためのサンプルとしても利用可能
 
 ## Photo Upload モジュールの Build 
-Raspberry Pi のシェル上で以下を実行する。  
+Raspberry Pi 3以上 のシェル上で以下を実行する。  
 ```
 $ cd PhotoUpload
 $ sudo docker build -t photoupload -f Dockerfile.arm32v7 .

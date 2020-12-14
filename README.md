@@ -38,6 +38,8 @@ Microsoft Azure が提供する IoT 関連サービス・技術は多岐にわ�
 6. [環境データの共有](docs/DataShare.md)
 7. [警告メールを送信する](docs/SendMail.md)
 8. [Azure IoT Central によるデバイス接続](docs/IoTCentral.md)
+9. [画像アップロード等の拡張モジュール追加](docs/AddExtendModules.md)
+
 
 Let's enjoy!
 
