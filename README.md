@@ -39,7 +39,8 @@ Microsoft Azure が提供する IoT 関連サービス・技術は多岐にわ�
 7. [警告メールを送信する](docs/SendMail.md)
 8. [Azure IoT Central によるデバイス接続](docs/IoTCentral.md)
 9. [画像アップロード等の拡張モジュール追加](docs/AddExtendModules.md)
-
+10. [Azure IoT Device SDK を使ったアプリの PnP 対応](docs/IoTAppPnP.md)
+11. [Azure IoT Central によるデバイス接続 - Advanced](docs/IoTCentral2nd.md)
 
 Let's enjoy!
 
