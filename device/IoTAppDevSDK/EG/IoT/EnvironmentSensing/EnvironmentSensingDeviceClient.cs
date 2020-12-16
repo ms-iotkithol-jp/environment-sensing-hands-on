@@ -151,9 +151,9 @@ namespace EG.IoT.EnvironmentSensing
                 }
                 if (isTemperatur && isHumidity && isPressure)
                 {
-                    var now = DateTime.Now;
+                    var now = DateTime.UtcNow;
                     envSensorDevice.Read();
-                    var msgBody = "{\"timestamp\":\"" + now.ToString("yyyy/MM/ddTHH:mm:ss") + "\"";
+                    var msgBody = "{\"timestamp\":\"" + now.ToString("yyyy-MM-ddTHH:mm:ssZ") + "\"";
                     if (isTemperatur)
                     {
                         msgBody += ",\"temperature\":" + envSensorDevice.ReadTemperature().ToString("0.##");
