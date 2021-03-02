@@ -65,14 +65,17 @@
             "settings": {
               "image": "${MODULES.BarometerSensing}",
               "createOptions": {
-                "HostConfig":{
-                  "Privileged": true,
-                  "Devices": [
-                    {
-                      "PathOnHost": "/dev/i2c-1",
-                      "PathInContainer": "/dev/i2c-1",
-                      "CgroupPermissions": "mrw"
-                    }
+                 "HostConfig":{
+                   "Binds": [
+                     "/dev/i2c-1:/dev/i2c-1"
+                   ],
+                   "Privileged": true,
+                   "Devices": [
+                     {
+                       "PathOnHost": "/dev/i2c-1",
+                       "PathInContainer": "/dev/i2c-1",
+                       "CgroupPermissions": "mrw"
+                     }
                   ]
                 }
               }

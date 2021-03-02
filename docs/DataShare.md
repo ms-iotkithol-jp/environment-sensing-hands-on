@@ -97,7 +97,7 @@ Azure が提供するサービスとの連携は、Functions のバインディ�
     getConnectionInfo().then(function (info) {
         let accessToken = info.accessToken;
 ```
-<- Your SignalR Uri -> の部分を、各自が構築した SignalR サービスの URL で置き換え、保存する。 
+<- Your SignalR Uri -> の部分を、各自が構築した SignalR サービスの URL([SignalRのサンプル](https://github.com/ms-iotkithol-jp/IoTDataShareBySignalRService#signalr-service-%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6iot-%E3%81%AE%E3%83%86%E3%83%AC%E3%83%A1%E3%83%88%E3%83%AA%E3%83%BC%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E9%85%8D%E5%B8%83%E3%81%99%E3%82%8B)のFunc2のTrigger URL) で置き換え、保存する。 
 [services/SampleViewer/multideviceviewer.html](../services/SampleViewer/multideviceviewer.html) を Chome 等の ウェブブラウザ―で開く。  
 この HTML ファイルが開かれると、JavaScript のロジックが実行され、SignalR サービスにサブスクライブし、データ受信待ちとなる。<b>datashare</b> にデータが送信されるたびに、ShareEnvData のロジックが起動され、SignalR を経て、データが届き、温度、湿度、大気圧のグラフが、デバイスごとに表示される。  
 
