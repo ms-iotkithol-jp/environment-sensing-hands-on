@@ -26,7 +26,7 @@ Microsoft Azure が提供する IoT 関連サービス・技術は多岐にわ�
 ----
 ## 実習内容  
 実習で作成する、システムの構成図を図示する。  
-![architecture](images/hol-arch-all.png)
+![architecture](images/hol-arch-all.svg)
 
 実習は、以下のステップで行う。  
 

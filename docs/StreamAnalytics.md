@@ -1,7 +1,7 @@
 # Azure IoT Hub で受信したデータをリアルタイム処理する  
 このステップでは、Azure Stream Analytics を使って、Azure IoT Hub がデバイスから受信したテレメトリーデータを、IoT Solution が実現したいシナリオに従ってデータ変換や、条件抽出を行う方法を学習する。  
 作成するサービス群と接続は以下のとおりである。  
-![architecture](../images/realtime-data-processing/architecture.png)
+![architecture](../images/realtime-data-processing/architecture.svg)
 
 作成する Stream Aanlytics に含まれる機能は以下のとおり。  
 - Azure IoT Hub が受信したデータを Blob Container に蓄積

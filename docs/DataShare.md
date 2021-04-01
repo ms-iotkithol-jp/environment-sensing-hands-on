@@ -2,7 +2,7 @@
 Stream Analytics で処理したデータを他の複数のサービスに共有する方法を実習する。 
 Event Hub の <b>datashare</b> で受信したデータを、SignalR サービスを使って、そのデータに関心のあるサービスやアプリに配信する。 
 追加で、不快指数が閾値以上のデータを送信してきたデバイスに対してコマンドを送信する処理も併せて実習する。  
-![architecture](../images/datashare/architecture.png)
+![architecture](../images/datashare/architecture.svg)
 尚、点線で囲まれた部分は、[IoTDataShareBySignalRService
 ](https://github.com/ms-iotkithol-jp/IoTDataShareBySignalRService
 ) という、別のリポジトリで公開しているコンテンツを流用する。  

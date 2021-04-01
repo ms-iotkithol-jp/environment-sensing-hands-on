@@ -1,7 +1,7 @@
 # Azure IoT Edge を使ったデバイスの接続  
 このステップでは、Azure IoT Edge を使って、デバイスを Azure IoT Hub に接続する。 
 
-![architecture](../images/device/iot-edge.png) 
+![architecture](../images/device/iot-edge.svg) 
 
 利用者の利便性を考え、簡易版と中級版を提供する。適宜選択して実習すること。  
 簡易版、詳細版、いずれも、計測、テレメトリーデータ送信、設定情報更新等のモジュール本体は、[BarometerSensing モジュール](../EdgeSolution/modules/BarometerSensing) を使用する。

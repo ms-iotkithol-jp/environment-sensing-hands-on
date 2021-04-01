@@ -1,6 +1,6 @@
 # 警告メールを送信する  
 Stream Analytics で抽出した警告データをトリガーにメールを送信する方法を実習する。 Event Hub の <b>alert</b> で受信したデータを、Logic App サービスを使って、警告状態にあるデバイスの管理者にメールを送信する。  
-![architecture](../images/send-mail/architecture.png)
+![architecture](../images/send-mail/architecture.svg)
 
 ※ 本実習を行うには、Office 365 のアカウントが必要  
 

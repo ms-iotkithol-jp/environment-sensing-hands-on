@@ -1,7 +1,7 @@
 # Azure IoT Device SDK を使ったデバイスの接続  
 このステップでは、Azure IoT Device SDK for .NET を使って、デバイスを Azure IoT Hub に接続する。 
 
-![architecture](../images/device/device-sdk.png)
+![architecture](../images/device/device-sdk.svg)
 
 ## 実習内容
 1. [IoT Hub への IoT デバイス登録](#1-iot-hub-への-iot-デバイス登録) 

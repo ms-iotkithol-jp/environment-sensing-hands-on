@@ -20,7 +20,7 @@ Azure IoT Central は、Azure IoT Hub、[DPS（Device Provisioning Service）](h
 
 左のペインの 'Build' を選択し、'Custmo apps' を選択して作業を進める。  
 
-![1-create-app](../images/iot-central/1-create-app.png)
+![1-create-app](../images/iot-central/1-create-app.svg)
 項目の設定は、  
 - 'Application template'  
 デフォルトのままで可
