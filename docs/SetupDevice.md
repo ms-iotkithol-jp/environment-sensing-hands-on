@@ -38,7 +38,20 @@ Grove Pi+ は Raspberry Piのイーサーネット接続ポートを左上にし
 - BME280 環境センサー → I2C-1
 - LED Button → D4  
 
-![schematic](../images/device/connect-sensors.png)
+![schematic](../images/device/connect-sensors.png)  
+
+2021/06/21 に、時節柄 CO2センサーを追加した。CO2センサーは、比較的安く、入手が容易（？）な [MH-Z19B](https://www.winsen-sensor.com/d/files/MH-Z19B.pdf) を使う。  
+MH-Z19B と GrovePi＋との接続は、Seeed の Grove センサー用のケーブルではそのまま接続できないので、図の様にそれぞれのケーブルを活用して接続する。  
+![co2 sensor connect](../images/device/co2sensor-connect.svg)
+
+※ CO2センサー計測ロジックありなしで、Balometer Sensing の Docker Image をそれぞれ以下の通り用意した。  
+|type|docker image|
+|-|-|
+|CO2センサー無し|embeddedgeorge/barometersensing:1.0.0-arm32v7|
+|CO2センサーあり|embeddedgeorge/barometersensing-co2:1.0.0-arm32v7|  
+
+※ [device/EdgeSolution/BarometerSensoing/Program.cs](../device/EdgeSolution/BarometerSensoing/Program.cs) の2行目の"// "を削除して Docker Image をビルドすれば、CO2ありのモジュールが出来上がる    
+
 
 ---
 [次のステップへ進む](IoTHub.md)

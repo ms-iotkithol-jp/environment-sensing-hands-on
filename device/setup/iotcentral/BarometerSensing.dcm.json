@@ -1,0 +1,236 @@
+{
+  "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing;2",
+  "@type": "Interface",
+  "contents": [
+    {
+      "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing:temperature;1",
+      "@type": [
+        "Telemetry",
+        "Temperature"
+      ],
+      "displayName": {
+        "en": "Temperature"
+      },
+      "name": "temperature",
+      "schema": "double",
+      "unit": "degreeCelsius"
+    },
+    {
+      "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing:humidity;1",
+      "@type": [
+        "Telemetry",
+        "Humidity"
+      ],
+      "displayName": {
+        "en": "Humidity"
+      },
+      "name": "humidity",
+      "schema": "double",
+      "unit": "percent"
+    },
+    {
+      "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing:Pressure;1",
+      "@type": [
+        "Telemetry",
+        "Pressure"
+      ],
+      "displayName": {
+        "en": "Pressure"
+      },
+      "name": "pressure",
+      "schema": "double",
+      "unit": "pascal"
+    },
+    {
+      "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing:timestamp;1",
+      "@type": "Telemetry",
+      "displayName": {
+        "en": "Timestamp"
+      },
+      "name": "timestamp",
+      "schema": "dateTime"
+    },
+    {
+      "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing:StartTelemetry;1",
+      "@type": "Command",
+      "commandType": "synchronous",
+      "displayName": {
+        "en": "Start Telemetry"
+      },
+      "name": "StartTelemetry"
+    },
+    {
+      "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing:StopTelemetry;1",
+      "@type": "Command",
+      "commandType": "synchronous",
+      "displayName": {
+        "en": "Stop Telemetry"
+      },
+      "name": "StopTelemetry"
+    },
+    {
+      "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing:Alert;1",
+      "@type": "Command",
+      "commandType": "synchronous",
+      "displayName": {
+        "en": "Alert Control"
+      },
+      "name": "Alert",
+      "request": {
+        "@type": "CommandPayload",
+        "displayName": {
+          "en": "Rquest Payload"
+        },
+        "name": "RequestPayload",
+        "schema": {
+          "@type": "Object",
+          "fields": [
+            {
+              "name": "value",
+              "dtmi:dtdl:property:schema;2": {
+                "@type": "Enum",
+                "enumValues": [
+                  {
+                    "enumValue": "on",
+                    "name": "on"
+                  },
+                  {
+                    "enumValue": "off",
+                    "name": "off"
+                  }
+                ],
+                "valueSchema": "string"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing:request_telemetry_config;1",
+      "@type": "Property",
+      "displayName": {
+        "en": "Telemetry Confguration Setting"
+      },
+      "name": "request_telemetry_config",
+      "schema": {
+        "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing:request_telemetry_config:schema;1",
+        "@type": "Object",
+        "fields": [
+          {
+            "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing:request_telemetry_config:schema:telemetryCycleMSec;1",
+            "displayName": {
+              "en": "Telemetry Cycle msec"
+            },
+            "name": "telemetryCycleMSec",
+            "schema": "integer"
+          },
+          {
+            "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing:request_telemetry_config:schema:temperatureAvailable;1",
+            "displayName": {
+              "en": "Tempertur Measurment Available"
+            },
+            "name": "temperatureAvailable",
+            "schema": "boolean"
+          },
+          {
+            "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing:request_telemetry_config:schema:humidityAvailable;1",
+            "displayName": {
+              "en": "Humidity Measurment Available"
+            },
+            "name": "humidityAvailable",
+            "schema": "boolean"
+          },
+          {
+            "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing:request_telemetry_config:schema:pressureAvailable;1",
+            "displayName": {
+              "en": "Pressure Measurment Available"
+            },
+            "name": "pressureAvailable",
+            "schema": "boolean"
+          },
+          {
+            "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing:request_telemetry_config:schema:co2Available;1",
+            "displayName": {
+              "en": "CO2 Concentration Measurment Available"
+            },
+            "name": "co2SensorAvailable",
+            "schema": "boolean"
+          }
+        ]
+      },
+      "writable": true
+    },
+    {
+      "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing:current_telemetry_config;1",
+      "@type": "Property",
+      "displayName": {
+        "en": "Current Telemetry Configuration"
+      },
+      "name": "current_telemetry_config",
+      "schema": {
+        "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing:current_telemetry_config:schema;1",
+        "@type": "Object",
+        "fields": [
+          {
+            "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing:current_telemetry_config:schema:telemetryCycleMSec;1",
+            "displayName": {
+              "en": "Telemetry Cycle msec"
+            },
+            "name": "telemetryCycleMSec",
+            "schema": "integer"
+          },
+          {
+            "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing:current_telemetry_config:schema:temperatureAvailable;1",
+            "displayName": {
+              "en": "Tempertur Measurment Available"
+            },
+            "name": "temperatureAvailable",
+            "schema": "boolean"
+          },
+          {
+            "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing:current_telemetry_config:schema:humidityAvailable;1",
+            "displayName": {
+              "en": "Humidity Measurment Available"
+            },
+            "name": "humidityAvailable",
+            "schema": "boolean"
+          },
+          {
+            "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing:current_telemetry_config:schema:pressureAvailable;1",
+            "displayName": {
+              "en": "Pressure Measurment Available"
+            },
+            "name": "pressureAvailable",
+            "schema": "boolean"
+          },
+          {
+            "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing:current_telemetry_config:schema:co2Available;1",
+            "displayName": {
+              "en": "CO2 Concentration Measurment Available"
+            },
+            "name": "co2SensorAvailable",
+            "schema": "boolean"
+          }
+        ]
+      },
+      "writable": false
+    },
+    {
+      "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing:co2;1",
+      "@type": "Telemetry",
+      "displayName": {
+        "en": "CO2 Concentration ppm"
+      },
+      "name": "co2",
+      "schema": "integer"
+    }
+  ],
+  "displayName": {
+    "en": "Manage"
+  },
+  "@context": [
+    "dtmi:iotcentral:context;2",
+    "dtmi:dtdl:context;2"
+  ]
+}

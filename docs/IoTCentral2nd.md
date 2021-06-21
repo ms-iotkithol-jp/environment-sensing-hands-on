@@ -1,5 +1,6 @@
 # モデル定義を使った、Azure IoT Central アプリケーションの作成  
 このステップでは、DTDL を使って記述されたモデルを使って IoT Central アプリケーションを作成する。  
+<b><u>※ 2021/6/21 現在、IoT Central の既存のモデル定義を使った device template 作成の GUI は更新されている。新しい GUI での作成方法は、[IoTCentral-20210621.md](./IoTCentral-20210621.md) を参照の事</u></b>   
 
 IoT Central アプリケーションを作成する。（前のステップで作成したアプリケーションを使ってもよい。）  
 Device Template を作成する。前のステップとは異なり、Deployment テンプレートは読み込まない。  

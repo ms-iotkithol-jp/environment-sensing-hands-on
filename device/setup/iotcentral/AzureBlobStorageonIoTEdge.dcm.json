@@ -1,0 +1,103 @@
+{
+  "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage;1",
+  "@type": "Interface",
+  "contents": [
+    {
+      "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceAutoDeleteProperties;1",
+      "@type": "Property",
+      "displayName": {
+        "en": "deviceAutoDeleteProperties"
+      },
+      "name": "deviceAutoDeleteProperties",
+      "schema": {
+        "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceAutoDeleteProperties:schema;1",
+        "@type": "Object",
+        "fields": [
+          {
+            "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceAutoDeleteProperties:schema:deleteOn;1",
+            "name": "deleteOn",
+            "schema": "boolean"
+          },
+          {
+            "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceAutoDeleteProperties:schema:deleteAfterMinutes;1",
+            "name": "deleteAfterMinutes",
+            "schema": "double"
+          },
+          {
+            "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceAutoDeleteProperties:schema:retainWhileUploading;1",
+            "name": "retainWhileUploading",
+            "schema": "boolean"
+          }
+        ]
+      },
+      "writable": true
+    },
+    {
+      "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceToCloudUploadProperties;1",
+      "@type": "Property",
+      "displayName": {
+        "en": "deviceToCloudUploadProperties"
+      },
+      "name": "deviceToCloudUploadProperties",
+      "schema": {
+        "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceToCloudUploadProperties:schema;1",
+        "@type": "Object",
+        "fields": [
+          {
+            "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceToCloudUploadProperties:schema:uploadOn;1",
+            "name": "uploadOn",
+            "schema": "boolean"
+          },
+          {
+            "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceToCloudUploadProperties:schema:uploadOrder;1",
+            "name": "uploadOrder",
+            "schema": "string"
+          },
+          {
+            "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceToCloudUploadProperties:schema:cloudStorageConnectionString;1",
+            "name": "cloudStorageConnectionString",
+            "schema": "string"
+          },
+          {
+            "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceToCloudUploadProperties:schema:storageContainersForUpload;1",
+            "name": "storageContainersForUpload",
+            "schema": {
+              "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceToCloudUploadProperties:schema:storageContainersForUpload:schema;1",
+              "@type": "Object",
+              "fields": [
+                {
+                  "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceToCloudUploadProperties:schema:storageContainersForUpload:schema:photos;1",
+                  "name": "photos",
+                  "schema": {
+                    "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceToCloudUploadProperties:schema:storageContainersForUpload:schema:photos:schema;1",
+                    "@type": "Object",
+                    "fields": [
+                      {
+                        "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceToCloudUploadProperties:schema:storageContainersForUpload:schema:photos:schema:target;1",
+                        "name": "target",
+                        "schema": "string"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "@id": "dtmi:embeddedgeorge:AzureBlobStorageonIoTEdge:manage:deviceToCloudUploadProperties:schema:deleteAfterUpload;1",
+            "name": "deleteAfterUpload",
+            "schema": "boolean"
+          }
+        ]
+      },
+      "writable": true
+    }
+  ],
+  "displayName": {
+    "en": "Manage"
+  },
+  "@context": [
+    "dtmi:iotcentral:context;2",
+    "dtmi:dtdl:context;2"
+  ]
+}

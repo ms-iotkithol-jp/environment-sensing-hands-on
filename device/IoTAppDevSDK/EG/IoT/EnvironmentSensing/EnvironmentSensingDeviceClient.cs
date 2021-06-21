@@ -15,23 +15,30 @@ namespace EG.IoT.EnvironmentSensing
 
         private BarometerBME280 envSensorDevice;
         private GrovePiPlusBlueLEDButton ledButtonDevice;
+        private GrovePiLightSensor lightSensorDevice;
+        private CO2SensorMHZ19B co2SensorDevice;
 
         public BarometerBME280 BarometerSensorDevice { get; }
         public GrovePiPlusBlueLEDButton LedButtonDevice { get; }
 
         private TelemetryConfig telemetryConfig;
 
-        public EnvironmentSensingDeviceClient(EG.IoT.Utils.IoTHubConnector connector, BarometerBME280 sensor, GrovePiPlusBlueLEDButton ledButton)
+        public EnvironmentSensingDeviceClient(EG.IoT.Utils.IoTHubConnector connector, BarometerBME280 sensor, GrovePiPlusBlueLEDButton ledButton, GrovePiLightSensor lightSensor, CO2SensorMHZ19B co2Sensor)
         {
             iothubClient = connector;
             envSensorDevice = sensor;
             ledButtonDevice = ledButton;
+            lightSensorDevice = lightSensor;
+            co2SensorDevice = co2Sensor;
+
             telemetryConfig = new TelemetryConfig()
             {
                 telemetryCycleMSec = 1000,
                 temperatureAvailable = true,
                 humidityAvailable = true,
-                pressureAvailable = true
+                pressureAvailable = true,
+                lightSenseAvailable = (lightSensor != null),
+                co2SensorAvailable = (co2Sensor != null)
             };
         }
 
@@ -113,6 +120,8 @@ namespace EG.IoT.EnvironmentSensing
                         if (config.humidityAvailable != null) telemetryConfig.humidityAvailable = config.humidityAvailable;
                         if (config.temperatureAvailable != null) telemetryConfig.temperatureAvailable = config.temperatureAvailable;
                         if (config.pressureAvailable != null) telemetryConfig.pressureAvailable = config.pressureAvailable;
+                        if (config.lightSenseAvailable != null) telemetryConfig.lightSenseAvailable = config.lightSenseAvailable;
+                        if (config.co2SenserAvailable != null) telemetryConfig.co2SensorAvailable = config.co2SensorAvailable;
                     }
                 }
 
@@ -140,6 +149,8 @@ namespace EG.IoT.EnvironmentSensing
                 bool isTemperatur = false;
                 bool isHumidity = false;
                 bool isPressure = false;
+                bool isLightSense = false;
+                bool isCO2 = false;
                 int telemetryCycleMSec = 0;
 
                 lock (telemetryConfig)
@@ -147,7 +158,9 @@ namespace EG.IoT.EnvironmentSensing
                     isTemperatur = telemetryConfig.temperatureAvailable;
                     isHumidity = telemetryConfig.humidityAvailable;
                     isPressure = telemetryConfig.pressureAvailable;
+                    isLightSense = telemetryConfig.lightSenseAvailable;
                     telemetryCycleMSec = telemetryConfig.telemetryCycleMSec;
+                    isCO2 = telemetryConfig.co2SensorAvailable;
                 }
                 if (isTemperatur && isHumidity && isPressure)
                 {
@@ -165,6 +178,14 @@ namespace EG.IoT.EnvironmentSensing
                     if (isHumidity)
                     {
                         msgBody += ",\"pressure\":" + envSensorDevice.ReadPressure().ToString("0.##");
+                    }
+                    if (isLightSense)
+                    {
+                        msgBody += ",\"lightsense\":" + lightSensorDevice.SensorValue();
+                    }
+                    if (isCO2)
+                    {
+                        msgBody += ",\"co2\":" + co2SensorDevice.SensorValue();
                     }
                     msgBody += "}";
                     var sendMsg = new Message(System.Text.Encoding.UTF8.GetBytes(msgBody));
@@ -295,6 +316,8 @@ namespace EG.IoT.EnvironmentSensing
             public bool temperatureAvailable { get; set; }
             public bool humidityAvailable { get; set; }
             public bool pressureAvailable { get; set; }
+            public bool lightSenseAvailable { get; set; }
+            public bool co2SensorAvailable { get; set; }
         }
     }
 }

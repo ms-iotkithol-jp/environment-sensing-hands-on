@@ -5,8 +5,8 @@
                 "modules": {
                     "BarometerSensing": {
                         "settings": {
-                            "image": "embeddedgeorge/barometersensing:1.0.0-arm32v7",
-                            "createOptions": "{\"HostConfig\":{\"Binds\":[\"/dev/i2c-1:/dev/i2c-1\"],\"Privileged\":true,\"Devices\":[{\"PathOnHost\":\"/dev/i2c-1\",\"PathInContainer\":\"/dev/i2c-1\",\"CgroupPermissions\":\"mrw\"}]}}"
+                            "image": "embeddedgeorge/barometersensing-co2:1.0.1-arm32v7",
+                            "createOptions": "{\"HostConfig\":{\"Binds\":[\"/dev/i2c-1:/dev/i2c-1\",\"/dev/serial0:/dev/serial0\"],\"Privileged\":true,\"Devices\":[{\"PathOnHost\":\"/dev/i2c-1\",\"PathInContainer\":\"/dev/i2c-1\",\"CgroupPermissions\":\"mrw\"},{\"PathOnHost\":\"/dev/serial0\",\"PathInContainer\":\"/dev/serial0\",\"CgroupPermissions\":\"mrw\"}]}}"
                         },
                         "type": "docker",
                         "version": "1.0",

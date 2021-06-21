@@ -1,0 +1,187 @@
+{
+  "@context": "dtmi:dtdl:context;2",
+  "@id": "dtmi:embeddedgeorge:environmenthol:barometersensing;2",
+  "@type": "Interface",
+  "displayName": "Barometer Sensing",
+  "contents": [
+    {
+      "@type": "Telemetry",
+      "name": "temperature",
+      "displayName": "Temperature",
+      "schema": "float",
+      "comment": "Cersius"
+    },
+    {
+      "@type": "Telemetry",
+      "name": "humidity",
+      "displayName": "Humidity",
+      "schema": "float",
+      "comment": "%"
+    },
+    {
+      "@type": "Telemetry",
+      "name": "pressure",
+      "displayName": "Pressure",
+      "comment": "hPa",
+      "schema": "float"
+    },
+    {
+      "@type": "Telemetry",
+      "name": "co2",
+      "schema": "integer",
+      "displayName": "CO2 Concentration",
+      "comment": "ppm"
+    },
+    {
+      "@type": "Telemetry",
+      "name": "timestamp",
+      "schema": "dateTime",
+      "displayName": "Measurd Time"
+    },
+    {
+      "@type": "Property",
+      "name": "request_telemetry_config",
+      "displayName": "Request Telemetry Configuration",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "telemetryCycleMSec",
+            "displayName": "Telemetry Cycle msec",
+            "schema": "integer"
+          },
+          {
+            "name": "temperatureAvailable",
+            "displayName": "Temperture Measurment & Send Available",
+            "schema": "boolean"
+          },
+          {
+            "name": "humidityAvailable",
+            "displayName": "Humidity Measurment & Send Available",
+            "schema": "boolean"
+          },
+          {
+            "name": "pressureAvailable",
+            "displayName": "Prssure Measurment & Send Availabl",
+            "schema": "boolean"
+          },
+          {
+            "name": "co2SensorAvailable",
+            "displayName": "CO2 Concentration Measurement & Send Available",
+            "schema": "boolean"
+          }
+        ]
+      },
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "current_telemetry_config",
+      "displayName": "Current Telemetry Configurtion",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "telemetryCycleMSec",
+            "displayName": "Telemetry Cycle msec",
+            "schema": "integer"
+          },
+          {
+            "name": "temperatureAvailable",
+            "displayName": "Temperture Measurment & Send Available",
+            "schema": "boolean"
+          },
+          {
+            "name": "humidityAvailable",
+            "displayName": "Humidity Measurment & Send Available",
+            "schema": "boolean"
+          },
+          {
+            "name": "pressureAvailable",
+            "displayName": "Prssure Measurment & Send Availabl",
+            "schema": "boolean"
+          },
+          {
+            "name": "co2SensorAvailable",
+            "displayName": "CO2 Concentration Measurement & Send Available",
+            "schema": "boolean"
+          }
+        ]
+      },
+      "writable": false
+    },
+    {
+      "@type": "Command",
+      "commandType": "synchronous",
+      "name": "StartTelemetry",
+      "displayName": "Start Telemetry",
+      "response": {
+        "name": "message",
+        "schema": "string"
+      }
+    },
+    {
+      "@type": "Command",
+      "commandType": "synchronous",
+      "name": "StopTelemetry",
+      "displayName": "Stop Telemetry",
+      "response": {
+        "name": "message",
+        "schema": "string"
+      }
+    },
+    {
+      "@type": "Command",
+      "commandType": "synchronous",
+      "name": "Alert",
+      "displayName": "Alert LED Control",
+      "request": {
+        "name": "value",
+        "schema": {
+          "@type": "Enum",
+          "valueSchema": "string",
+          "enumValues": [
+            {
+              "name": "on",
+              "enumValue": "on"
+            },
+            {
+              "name": "off",
+              "enumValue": "off"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "@type": "Command",
+      "commandType": "asynchronous",
+      "name": "AlertAsync",
+      "request": {
+        "name": "command",
+        "schema": {
+          "@type": "Object",
+          "fields": {
+            "name": "alert",
+            "schema": {
+              "@type": "Enum",
+              "valueSchema": "string",
+              "enumValues": [
+                {
+                  "name": "on",
+                  "displayName": "LED On",
+                  "enumValue": "on"
+                },
+                {
+                  "name": "off",
+                  "displayName": "LED Off",
+                  "enumValue": "off"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

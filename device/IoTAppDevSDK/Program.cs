@@ -5,6 +5,7 @@ using EG.IoT.Grove;
 using EG.IoT.Utils;
 using System;
 using System.Diagnostics;
+using System.IO.Ports;
 using System.Threading;
 
 namespace IoTAppDevSDK
@@ -15,6 +16,8 @@ namespace IoTAppDevSDK
         static GrovePiPlus grovePiPlus;
         static GrovePiPlusBlueLEDButton ledButtonDevice;
         static BarometerBME280 barometerSensorDevice;
+        static GrovePiLightSensor lightSensor = null;
+        static CO2SensorMHZ19B co2Sensor = null;
         static EnvironmentSensingDeviceClient sensingDeviceClient;
 
 
@@ -58,8 +61,29 @@ namespace IoTAppDevSDK
             var pressure = bme280.ReadPressure();
             Console.WriteLine($"T={temperature}C,H={humidity}%,P={pressure}hPa");
 
+#if USE_LIGHT_SENSE
+            lightSensor = new GrovePiLightSensor(groveShield, 0);
+            var lightSensorValue = lightSensor.SensorValue();
+            var lightSensorResistance = lightSensor.Resitance(lightSensorValue);
+            Console.WriteLine($"lightSensor={lightSensorValue},resistance={lightSensorResistance}");
+#endif
+
+            co2Sensor = new CO2SensorMHZ19B()
+            {
+                Port = "/dev/serial0"
+            };
+            if (co2Sensor.Initialize())
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    var co2 = co2Sensor.SensorValue();
+                    Console.WriteLine($"CO2:{co2} ppm");
+                    Thread.Sleep(1000);
+                }
+            }
+
             EG.IoT.Utils.IoTHubConnector iothubClient = new EG.IoT.Utils.DeviceClientConnector(iothubcs);
-            var sensingDevice = new EG.IoT.EnvironmentSensing.EnvironmentSensingDeviceClient(iothubClient, bme280, gblueLedButton);
+            var sensingDevice = new EG.IoT.EnvironmentSensing.EnvironmentSensingDeviceClient(iothubClient, bme280, gblueLedButton, lightSensor, co2Sensor);
 
             var tokenSource = new CancellationTokenSource();
             var ct = tokenSource.Token;

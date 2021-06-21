@@ -246,5 +246,18 @@ $"FROM devices Where properties.reported.telemetry-config.telemetryCycleMSec <> 
 ```
 Raspberry Pi 起動時に確定した、IP アドレスが、追加したモジュールのツインの Reported Properties に表示される。 
 
---- 
+---  
+## IoT Edge Module の ビルド方法  
+このハンズオンで使用する IoT Edge Module は、全て、Raspberry Pi で Build 可能である。  
+具体的には、本 Repository を Raspberry Pi のシェル上で clone し、各モジュールのディレクトリで以下の様なコマンドを実行して IoT Edge Module（Docker Image）の Build と Docker リポジトリへの Push を行う。  
+```sh
+cd BarometerSensing
+sudo docker build -t barometersensing-co2 -f Dockerfile.arm32v7 .
+sudo docker tag barometersensing-co2 your-repository/barometersensing-co2:version-arm32v7
+sudo docker pushu your-repository/barometersensing-co2:version-arm32v7
+```
+"<i>your-repository</i>"、"<i>version</i>" は、各自の状況に合わせて適宜決めること。  
+
+
+---
 [次のステップに進む](StreamAnalytics.md)

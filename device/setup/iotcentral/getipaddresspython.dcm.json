@@ -1,0 +1,44 @@
+{
+  "@id": "dtmi:embeddedgeorge:getipaddresspython:manage;1",
+  "@type": "Interface",
+  "contents": [
+    {
+      "@id": "dtmi:embeddedgeorge:getipaddresspython:manage:networkInfo;1",
+      "@type": "Property",
+      "displayName": {
+        "en": "Local Network Informtin"
+      },
+      "name": "networkInfo",
+      "schema": {
+        "@id": "dtmi:embeddedgeorge:getipaddresspython:manage:networkInfo:schema;1",
+        "@type": "Object",
+        "fields": [
+          {
+            "@id": "dtmi:embeddedgeorge:getipaddresspython:manage:networkInfo:schema:wlan0;1",
+            "displayName": {
+              "en": "Wi-Fi Connection IP Address"
+            },
+            "name": "wlan0",
+            "schema": "string"
+          },
+          {
+            "@id": "dtmi:embeddedgeorge:getipaddresspython:manage:networkInfo:schema:eth0;1",
+            "displayName": {
+              "en": "Wired Connection IP Address"
+            },
+            "name": "eth0",
+            "schema": "string"
+          }
+        ]
+      },
+      "writable": false
+    }
+  ],
+  "displayName": {
+    "en": "Manage"
+  },
+  "@context": [
+    "dtmi:iotcentral:context;2",
+    "dtmi:dtdl:context;2"
+  ]
+}

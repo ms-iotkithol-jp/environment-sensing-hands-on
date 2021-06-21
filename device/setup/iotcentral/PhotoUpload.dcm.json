@@ -1,0 +1,96 @@
+{
+  "@id": "dtmi:embeddedgeorge:photoupload:manage;1",
+  "@type": "Interface",
+  "contents": [
+    {
+      "@id": "dtmi:embeddedgeorge:photoupload:manage:filename;1",
+      "@type": "Telemetry",
+      "displayName": {
+        "en": "Uploaded File Name"
+      },
+      "name": "filename",
+      "schema": "string"
+    },
+    {
+      "@id": "dtmi:embeddedgeorge:photoupload:manage:timestamp;1",
+      "@type": "Telemetry",
+      "displayName": {
+        "en": "Timestamp"
+      },
+      "name": "timestamp",
+      "schema": "dateTime"
+    },
+    {
+      "@id": "dtmi:embeddedgeorge:photoupload:manage:Start;1",
+      "@type": "Command",
+      "commandType": "synchronous",
+      "displayName": {
+        "en": "Start Uploading"
+      },
+      "name": "Start",
+      "request": {
+        "@type": "CommandPayload",
+        "name": "RequestPayload",
+        "schema": {
+          "@type": "Object",
+          "fields": [
+            {
+              "@id": "dtmi:embeddedgeorge:photoupload:manage:Start:request:photo_upload_notify;1",
+              "displayName": {
+                "en": "Is Photo Upload Notify"
+              },
+              "name": "photo_upload_notify",
+              "schema": "boolean"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "@id": "dtmi:embeddedgeorge:photoupload:manage:Stop;1",
+      "@type": "Command",
+      "commandType": "synchronous",
+      "displayName": {
+        "en": "Stop Uploading"
+      },
+      "name": "Stop"
+    },
+    {
+      "@id": "dtmi:embeddedgeorge:photoupload:manage:upload_cycle_sec;1",
+      "@type": "Property",
+      "displayName": {
+        "en": "Upload Cycle seconds"
+      },
+      "name": "upload_cycle_sec",
+      "schema": "integer",
+      "writable": true
+    },
+    {
+      "@id": "dtmi:embeddedgeorge:photoupload:manage:current_upload_cycle_sec;1",
+      "@type": "Property",
+      "displayName": {
+        "en": "Curret Upload Cycle seconds"
+      },
+      "name": "current_upload_cycle_sec",
+      "schema": "integer",
+      "writable": false
+    },
+    {
+      "@id": "dtmi:embeddedgeorge:photoupload:manage:photo_uploading;1",
+      "@type": "Property",
+      "displayName": {
+        "en": "Photo Uploading Status"
+      },
+      "name": "photo_uploading",
+      "schema": "boolean",
+      "writable": false
+    }
+  ],
+  "displayName": {
+    "en": "Manage"
+  },
+  "@context": [
+    "dtmi:iotcentral:context;2",
+    "dtmi:dtdl:context;2"
+  ]
+}

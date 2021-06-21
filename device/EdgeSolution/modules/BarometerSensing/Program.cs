@@ -1,3 +1,6 @@
+// #define USE_LIGHT_SENSE
+// #define USE_CO2_SENSE // -> version.co2
+
 namespace BarometerSensing
 {
     using System;
@@ -22,6 +25,8 @@ namespace BarometerSensing
         static GrovePiPlusBlueLEDButton ledButtonDevice;
         static BarometerBME280 barometerSensorDevice;
         static EnvironmentSensingDeviceClient sensingDeviceClient;
+        static GrovePiLightSensor lightSensor = null;
+        static CO2SensorMHZ19B co2Sensor = null;
 
         static void Main(string[] args)
         {
@@ -59,10 +64,16 @@ namespace BarometerSensing
             ledButtonDevice = new GrovePiPlusBlueLEDButton(grovePiPlus,4,5);
             barometerSensorDevice = new BarometerBME280(1);
             barometerSensorDevice.Initialize();
+#if USE_LIGHT_SENSE
+            lightSensor = new GrovePiLightSensor(grovePiPlus, 0);
+#endif
+#if USE_CO2_SENSE
+            co2Sensor = new CO2SensorMHZ19B();
+#endif
             Console.WriteLine("Sensing Device Initialized");
 
             iotHubConnector = new ModuleClientConnector(settings, "command-input", "telemetry-output");
-            sensingDeviceClient = new EnvironmentSensingDeviceClient(iotHubConnector,barometerSensorDevice, ledButtonDevice);
+            sensingDeviceClient = new EnvironmentSensingDeviceClient(iotHubConnector,barometerSensorDevice, ledButtonDevice, lightSensor, co2Sensor);
             
             var tokenSource = new CancellationTokenSource();
             var ct = tokenSource.Token;

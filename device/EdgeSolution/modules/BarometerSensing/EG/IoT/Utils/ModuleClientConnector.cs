@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.Devices.Client;
+﻿//#define USE_CO2_SENSE
+using Microsoft.Azure.Devices.Client;
 using Microsoft.Azure.Devices.Shared;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,11 @@ namespace EG.IoT.Utils
         ITransportSettings[] envSettings;
         string msgInputName = null;
         string msgOutputName = null;
+#if USE_CO2_SENSE
+        static string PnPModelId = "dtmi:embeddedgeorge:BarometerSensing:manage;2";
+#else
         static string PnPModelId = "dtmi:embeddedgeorge:BarometerSensing:manage;1";
-
+#endif
 
         public ModuleClientConnector(ITransportSettings[] settings, string inputName, string outputName)
         {
@@ -32,10 +36,10 @@ namespace EG.IoT.Utils
         {
             var option = new ClientOptions
             {
-                ModelId = IoTHubConnector.PnPModelId
+                ModelId = ModuleClientConnector.PnPModelId
             };
             moduleClient = await ModuleClient.CreateFromEnvironmentAsync(envSettings, options:option);
-            Console.WriteLine($"Connected to Edge Hub as Plug and Play Model Id={IoTHubConnector.PnPModelId}");
+            Console.WriteLine($"Connected to Edge Hub as Plug and Play Model Id={ModuleClientConnector.PnPModelId}");
 
             await moduleClient.OpenAsync();
 
